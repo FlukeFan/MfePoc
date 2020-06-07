@@ -1,0 +1,9 @@
+<Project DefaultTargets="Package" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup>
+    <AllFiles Include="**" />
+    <AllFiles Remove="**\bin\**" />
+    <AllFiles Remove="**\obj\**" />
+  </ItemGroup>
+
+</Project>

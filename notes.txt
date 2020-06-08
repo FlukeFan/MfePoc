@@ -1,0 +1,11 @@
+
+To do:
+
+When hit / ... show menu (hard coded for now)
+When hit /app1 ... same menu, but taken from mfe, and with content from app1
+When hit /app2 ... same menu, but content is from app2 (Blazor)
+When hit /app1/page ... navigate through PJAX, or through HTTP
+
+
+Investigate all on same port:  https://www.cafe-encounter.net/p1911/iis-express-run-a-child-web-application-in-a-virtual-directory-under-a-parent-application
+(perhaps from build utility script?  startup in Development mode?)

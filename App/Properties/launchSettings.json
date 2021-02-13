@@ -5,15 +5,12 @@
     "iis": {
       "applicationUrl": "http://localhost:8123",
       "sslPort": 0
-    },
-    "iisExpress": {
-      "applicationUrl": "http://localhost:50560",
-      "sslPort": 44332
     }
   },
   "profiles": {
     "IIS": {
-      "commandName": "IIS"
+      "commandName": "IIS",
+      "launchBrowser": true
     }
   }
 }

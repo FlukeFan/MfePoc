@@ -1,7 +1,9 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<p>Blazor Server Side</p>
 
-Welcome to your new app.
+<p>Rendered from process Id=@processId</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
+    private int processId = System.Diagnostics.Process.GetCurrentProcess().Id;
+}

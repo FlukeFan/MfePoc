@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost:8123/Module2",
+      "applicationUrl": "http://localhost:8123/BlazorSS1",
       "sslPort": 0
     }
   },

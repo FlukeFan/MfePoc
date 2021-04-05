@@ -1,45 +1,47 @@
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
 namespace BlazorSS1
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment hostEnvironment)
         {
-            Configuration = configuration;
+            HostEnvironment = hostEnvironment;
         }
 
-        public IConfiguration Configuration { get; }
+        public IWebHostEnvironment HostEnvironment { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services
+                .AddRazorPages()
+                .AddRazorRuntimeCompilation();
+
             services.AddServerSideBlazor();
+
+            services.Configure<MvcRazorRuntimeCompilationOptions>(opt =>
+            {
+                var libPath = Path.Combine(HostEnvironment.ContentRootPath, "..", "Shared");
+                var libFullPath = Path.GetFullPath(libPath);
+                opt.FileProviders.Add(new PhysicalFileProvider(libFullPath));
+            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UsePathBase("/BlazorSS1");
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

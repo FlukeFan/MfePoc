@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var baseUrl = (string)ViewData["BaseUrl"];
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,6 +9,10 @@
     <title>Micro Frontends PoC in .NET - @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/_content/Shared/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/_content/Shared/css/site.css" />
+    @if (!string.IsNullOrWhiteSpace(baseUrl))
+    {
+        <base href="@baseUrl" />
+    }
 </head>
 <body>
     <header>

@@ -22,7 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{2AA7C477-4
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{40CB37B0-43A3-434A-9A2B-3C3E462B2FCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{40CB37B0-43A3-434A-9A2B-3C3E462B2FCA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dashboard", "Dashboard\Dashboard.csproj", "{88A1835F-83D9-458E-9C34-C35058B6C982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +96,18 @@ Global
 		{40CB37B0-43A3-434A-9A2B-3C3E462B2FCA}.Release|x64.Build.0 = Release|Any CPU
 		{40CB37B0-43A3-434A-9A2B-3C3E462B2FCA}.Release|x86.ActiveCfg = Release|Any CPU
 		{40CB37B0-43A3-434A-9A2B-3C3E462B2FCA}.Release|x86.Build.0 = Release|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Debug|x64.Build.0 = Debug|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Debug|x86.Build.0 = Debug|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Release|x64.ActiveCfg = Release|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Release|x64.Build.0 = Release|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Release|x86.ActiveCfg = Release|Any CPU
+		{88A1835F-83D9-458E-9C34-C35058B6C982}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

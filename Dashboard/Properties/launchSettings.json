@@ -1,0 +1,20 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost:8123/Dashboard",
+      "sslPort": 0
+    },
+    "iisExpress": {
+      "applicationUrl": "http://localhost:51032",
+      "sslPort": 44379
+    }
+  },
+  "profiles": {
+    "IIS": {
+      "commandName": "IIS",
+      "sqlDebugging": true
+    }
+  }
+}

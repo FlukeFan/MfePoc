@@ -1,6 +1,5 @@
 ﻿@page "/"
 @namespace BlazorSS1.Pages
-@using BlazorSS1.Components
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_appLayout";
@@ -11,9 +10,9 @@
     <component type="typeof(App)" render-mode="ServerPrerendered" />
 </div>
 
-<div>
-    <component type="typeof(Counter)" render-mode="Server" />
-    <component type="typeof(HostDetail)" render-mode="Server" />
-</div>
-
-<script src="_framework/blazor.server.js"></script>
+@section Scripts {
+    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script>
+        window.Blazor.start();
+    </script>
+}

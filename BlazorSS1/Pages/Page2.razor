@@ -2,4 +2,47 @@
 
 <p>Blazor Server Side page 2</p>
 
+<div>
+    @_renderFragment
+</div>
+
+<br />
+<button class="btn btn-primary" @onclick="DisplayCounter">Counter</button>
+<br />
+<br />
+<button class="btn btn-primary" @onclick="DisplayHostDetail">Host Detail</button>
+
+
+<br />
+<br />
+
 <a href="">Back to index</a>
+
+@code {
+
+    private RenderFragment _renderFragment = b =>
+    {
+        b.OpenElement(0, "div");
+        b.AddContent(1, "no component selected");
+        b.CloseElement();
+    };
+
+    private void DisplayCounter()
+    {
+        _renderFragment = b =>
+        {
+            b.OpenComponent(0, typeof(Counter));
+            b.CloseComponent();
+        };
+    }
+
+    private void DisplayHostDetail()
+    {
+        _renderFragment = b =>
+        {
+            b.OpenComponent(0, typeof(HostDetail));
+            b.CloseComponent();
+        };
+    }
+
+}

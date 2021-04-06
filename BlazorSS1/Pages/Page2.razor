@@ -29,20 +29,20 @@
 
     private void DisplayCounter()
     {
-        _renderFragment = b =>
-        {
-            b.OpenComponent(0, typeof(Counter));
-            b.CloseComponent();
-        };
+        Display<Counter>();
     }
 
     private void DisplayHostDetail()
     {
+        Display<HostDetail>();
+    }
+
+    private void Display<T>()
+    {
         _renderFragment = b =>
         {
-            b.OpenComponent(0, typeof(HostDetail));
+            b.OpenComponent(0, typeof(T));
             b.CloseComponent();
         };
     }
-
 }

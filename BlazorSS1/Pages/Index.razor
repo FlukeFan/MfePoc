@@ -2,8 +2,9 @@
 
 <p>Blazor Server Side</p>
 
-<p>Rendered from process Id=@processId</p>
+<p>Rendered from process Id=@_processId Framework=@_framework</p>
 
 @code {
-    private int processId = System.Diagnostics.Process.GetCurrentProcess().Id;
+    private int _processId = System.Diagnostics.Process.GetCurrentProcess().Id;
+    private string _framework = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
 }

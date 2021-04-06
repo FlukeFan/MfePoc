@@ -1,0 +1,16 @@
+﻿
+
+<div>
+    counter: @currentCount
+    &nbsp;
+    <button class="btn btn-primary" @onclick="IncrementCount">+1</button>
+</div>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}

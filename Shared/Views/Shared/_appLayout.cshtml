@@ -1,17 +1,18 @@
-﻿@{
-    var baseUrl = (string)ViewData["BaseUrl"];
+﻿@namespace MfePoc.Shared.Views.Shared
+@{
+    var layoutModel = this.LayoutModel();
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Micro Frontends PoC in .NET - @ViewData["Title"]</title>
+    <title>Micro Frontends PoC in .NET - @layoutModel.Title</title>
     <link rel="stylesheet" href="~/_content/MfePoc.Shared/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/_content/MfePoc.Shared/css/site.css" />
-    @if (!string.IsNullOrWhiteSpace(baseUrl))
+    @if (!string.IsNullOrWhiteSpace(layoutModel.BaseUrl))
     {
-        <base href="@baseUrl" />
+        <base href="@layoutModel.BaseUrl" />
     }
 </head>
 <body>

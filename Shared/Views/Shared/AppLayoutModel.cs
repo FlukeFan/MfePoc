@@ -2,7 +2,7 @@
 
 namespace MfePoc.Shared.Views.Shared
 {
-    internal class AppLayoutModel
+    public class AppLayoutModel
     {
         public string Title;
         public string BaseUrl;
@@ -10,10 +10,15 @@ namespace MfePoc.Shared.Views.Shared
 
     public static class AppLayoutExtensions
     {
+        public static AppLayoutModel LayoutModel(this IRazorPage page)
+        {
+            return (AppLayoutModel)page.ViewContext.ViewData["appLayoutModel"];
+        }
+
         public static void SetAppLayout(
             this IRazorPage page,
             string title,
-            string baseUrl = null)
+            string baseUrl)
         {
             page.Layout = "_appLayout";
 
@@ -24,10 +29,6 @@ namespace MfePoc.Shared.Views.Shared
             };
 
             page.ViewContext.ViewData["appLayoutModel"] = model;
-
-            // until all ViewData references are converted ...
-            page.ViewContext.ViewData["Title"] = model.Title;
-            page.ViewContext.ViewData["BaseUrl"] = model.BaseUrl;
         }
     }
 }

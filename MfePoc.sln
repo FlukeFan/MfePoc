@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Shared", "Shared\Mfe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Dashboard", "Dashboard\MfePoc.Dashboard.csproj", "{88A1835F-83D9-458E-9C34-C35058B6C982}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.BlazorSS2", "BlazorSS2\MfePoc.BlazorSS2.csproj", "{F193FB7A-0871-4099-8799-96FE83136F87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,18 @@ Global
 		{88A1835F-83D9-458E-9C34-C35058B6C982}.Release|x64.Build.0 = Release|Any CPU
 		{88A1835F-83D9-458E-9C34-C35058B6C982}.Release|x86.ActiveCfg = Release|Any CPU
 		{88A1835F-83D9-458E-9C34-C35058B6C982}.Release|x86.Build.0 = Release|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Debug|x64.Build.0 = Debug|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Debug|x86.Build.0 = Debug|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Release|x64.ActiveCfg = Release|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Release|x64.Build.0 = Release|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Release|x86.ActiveCfg = Release|Any CPU
+		{F193FB7A-0871-4099-8799-96FE83136F87}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

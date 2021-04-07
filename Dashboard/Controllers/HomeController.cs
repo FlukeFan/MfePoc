@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Dashboard.Controllers
+namespace MfePoc.Dashboard.Controllers
 {
     public class HomeController : Controller
     {

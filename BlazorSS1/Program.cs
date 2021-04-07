@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace BlazorSS1
+namespace MfePoc.BlazorSS1
 {
     public class Program
     {

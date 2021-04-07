@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
-namespace BlazorSS1
+namespace MfePoc.BlazorSS1
 {
     public class Startup
     {

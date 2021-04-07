@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Dashboard
+namespace MfePoc.Dashboard
 {
     public class Program
     {

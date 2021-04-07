@@ -5,16 +5,10 @@
 @{
     this.SetAppLayout(
         title: "BlazorSS1",
-        baseUrl: "/BlazorSS1/");
+        baseUrl: "/BlazorSS1/",
+        enableBlazorServerSide: true);
 }
 
 <div>
     <component type="typeof(App)" render-mode="ServerPrerendered" />
 </div>
-
-@section Scripts {
-    <script src="_framework/blazor.server.js" autostart="false"></script>
-    <script>
-        window.Blazor.start();
-    </script>
-}

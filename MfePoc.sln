@@ -26,6 +26,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.BlazorSS2", "BlazorS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.BlazorCS1.Client", "BlazorCS1.Client\MfePoc.BlazorCS1.Client.csproj", "{07C38841-54F8-4E67-BAE5-4AEC6E743BD3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.BlazorCS1", "BlazorCS1\MfePoc.BlazorCS1.csproj", "{D71A770B-B1C7-46EE-97B5-72B10E524C88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +110,18 @@ Global
 		{07C38841-54F8-4E67-BAE5-4AEC6E743BD3}.Release|x64.Build.0 = Release|Any CPU
 		{07C38841-54F8-4E67-BAE5-4AEC6E743BD3}.Release|x86.ActiveCfg = Release|Any CPU
 		{07C38841-54F8-4E67-BAE5-4AEC6E743BD3}.Release|x86.Build.0 = Release|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Debug|x64.Build.0 = Debug|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Debug|x86.Build.0 = Debug|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Release|x64.ActiveCfg = Release|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Release|x64.Build.0 = Release|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Release|x86.ActiveCfg = Release|Any CPU
+		{D71A770B-B1C7-46EE-97B5-72B10E524C88}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

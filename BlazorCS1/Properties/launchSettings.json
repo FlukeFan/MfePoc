@@ -3,14 +3,13 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost:8123/Dashboard",
+      "applicationUrl": "http://localhost:8123/BlazorCS1",
       "sslPort": 0
     }
   },
   "profiles": {
     "IIS": {
-      "commandName": "IIS",
-      "sqlDebugging": true
+      "commandName": "IIS"
     }
   }
 }

@@ -43,6 +43,7 @@ namespace MfePoc.BlazorCS1
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapFallbackToFile("index.html");
             });
         }
     }

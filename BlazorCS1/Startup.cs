@@ -36,6 +36,8 @@ namespace MfePoc.BlazorCS1
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseBlazorFrameworkFiles();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseRouting();
 

@@ -7,6 +7,7 @@ namespace MfePoc.Shared.Views.Shared
         public string Title;
         public string BaseUrl;
         public bool EnableBlazorServerSide;
+        public bool EnableBlazorClientSide;
     }
 
     public static class AppLayoutExtensions
@@ -20,7 +21,8 @@ namespace MfePoc.Shared.Views.Shared
             this IRazorPage page,
             string title,
             string baseUrl,
-            bool enableBlazorServerSide = false)
+            bool enableBlazorServerSide = false,
+            bool enableBlazorClientSide = false)
         {
             page.Layout = "_appLayout";
 
@@ -29,6 +31,7 @@ namespace MfePoc.Shared.Views.Shared
                 Title = title,
                 BaseUrl = baseUrl,
                 EnableBlazorServerSide = enableBlazorServerSide,
+                EnableBlazorClientSide = enableBlazorClientSide,
             };
 
             page.ViewContext.ViewData["appLayoutModel"] = model;

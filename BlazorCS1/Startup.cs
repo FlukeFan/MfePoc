@@ -19,7 +19,9 @@ namespace MfePoc.BlazorCS1
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services
+                .AddRazorPages()
+                .AddRazorRuntimeCompilation();
 
             services.Configure<MvcRazorRuntimeCompilationOptions>(opt =>
             {
@@ -37,13 +39,12 @@ namespace MfePoc.BlazorCS1
             }
 
             app.UseBlazorFrameworkFiles();
-            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapFallbackToFile("index.html");
+                endpoints.MapFallbackToPage("/_Host");
             });
         }
     }

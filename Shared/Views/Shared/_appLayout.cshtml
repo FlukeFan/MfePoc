@@ -14,6 +14,7 @@
     {
         <base href="@layoutModel.BaseUrl" />
     }
+    <link href="MfePoc.BlazorCS1.Client.styles.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -75,6 +76,12 @@
         <script>
             window.Blazor.start();
         </script>
+    }
+
+    <!-- blazor client-side -->
+    @if (layoutModel.EnableBlazorClientSide)
+    {
+        <script src="@(layoutModel.BaseUrl)_framework/blazor.webassembly.js"></script>
     }
 
     @RenderSection("Scripts", required: false)

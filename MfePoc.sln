@@ -14,7 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{2AA7C477-4
 		build.proj = build.proj
 		CommandPrompt.bat = CommandPrompt.bat
 		global.json = global.json
-		notes.txt = notes.txt
 		readme.md = readme.md
 	EndProjectSection
 EndProject

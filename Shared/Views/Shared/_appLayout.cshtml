@@ -14,7 +14,10 @@
     {
         <base href="@layoutModel.BaseUrl" />
     }
-    <link href="MfePoc.BlazorCS1.Client.styles.css" rel="stylesheet" />
+    @if (!string.IsNullOrWhiteSpace(layoutModel.ClientStyles))
+    {
+        <link href="@layoutModel.ClientStyles" rel="stylesheet" />
+    }
 </head>
 <body>
     <header>

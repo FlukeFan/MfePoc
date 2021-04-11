@@ -26,16 +26,19 @@ namespace MfePoc.Home
         {
             services.AddZipDeploy();
 
-            services
-                .AddControllersWithViews()
-                .AddRazorRuntimeCompilation();
+            var mvcBuilder = services.AddControllersWithViews();
 
-            services.Configure<MvcRazorRuntimeCompilationOptions>(opt =>
+            if (HostEnvironment.IsDevelopment())
             {
-                var libPath = Path.Combine(HostEnvironment.ContentRootPath, "..", "Shared");
-                var libFullPath = Path.GetFullPath(libPath);
-                opt.FileProviders.Add(new PhysicalFileProvider(libFullPath));
-            });
+                mvcBuilder.AddRazorRuntimeCompilation();
+
+                services.Configure<MvcRazorRuntimeCompilationOptions>(opt =>
+                {
+                    var libPath = Path.Combine(HostEnvironment.ContentRootPath, "..", "Shared");
+                    var libFullPath = Path.GetFullPath(libPath);
+                    opt.FileProviders.Add(new PhysicalFileProvider(libFullPath));
+                });
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

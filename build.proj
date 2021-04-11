@@ -1,9 +1,26 @@
 <Project DefaultTargets="Package" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <ItemGroup>
-    <AllFiles Include="**" />
-    <AllFiles Remove="**\bin\**" />
-    <AllFiles Remove="**\obj\**" />
-  </ItemGroup>
+  <PropertyGroup>
+    <PackageFolder>Home/bin/packages</PackageFolder>
+  </PropertyGroup>
+
+  <Target Name="Package">
+    <RemoveDir Directories="$(PackageFolder)" />
+  </Target>
+
+  <Target Name="Deploy" DependsOnTargets="Package">
+    <Error Text="Need to set MfePocFtpHost variable" Condition="'$(MfePocFtpHost)'==''" />
+    <Error Text="Need to set MfePocFtpUser variable" Condition="'$(MfePocFtpUser)'==''" />
+    <Error Text="Need to set MfePocFtpPassword variable" Condition="'$(MfePocFtpPassword)'==''" />
+    <Error Text="Need to set MfePocFtpRemoteDir variable" Condition="'$(MfePocFtpRemoteDir)'==''" />
+    <ItemGroup>
+      <FtpFileLines Include="cd $(MfePocFtpRemoteDir)" />
+      <FtpFileLines Include="put $(PackageFolder)/publish.zip publish.zip.tmp" />
+      <FtpFileLines Include="ren publish.zip.tmp publish.zip" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(TEMP)/MfePocFtpBatch.txt" Lines="@(FtpFileLines)" Overwrite="true" />
+    <Exec Command="Tools\PuTTY\psftp.exe -pw $(MfePocFtpPassword) -b $(TEMP)/MfePocFtpBatch.txt $(MfePocFtpUser)@$(MfePocFtpHost) &lt;Tools\PuTTY\input.txt &gt; NUL 2&gt;&amp;1" />
+    <Message Text="Completed SFTP of packages" Importance="high" />
+  </Target>
 
 </Project>

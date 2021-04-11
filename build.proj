@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <PackageFolder>Home/bin/packages</PackageFolder>
+    <EchoOff Condition="'$(EchoOff)'==''">True</EchoOff>
   </PropertyGroup>
 
   <Target Name="Package">
@@ -19,7 +20,7 @@
       <FtpFileLines Include="ren publish.zip.tmp publish.zip" />
     </ItemGroup>
     <WriteLinesToFile File="$(TEMP)/MfePocFtpBatch.txt" Lines="@(FtpFileLines)" Overwrite="true" />
-    <Exec Command="Tools\PuTTY\psftp.exe -pw $(MfePocFtpPassword) -b $(TEMP)/MfePocFtpBatch.txt $(MfePocFtpUser)@$(MfePocFtpHost) &lt;Tools\PuTTY\input.txt &gt; NUL 2&gt;&amp;1" />
+    <Exec EchoOff="$(EchoOff)" Command="Tools\PuTTY\psftp.exe -pw $(MfePocFtpPassword) -b $(TEMP)/MfePocFtpBatch.txt $(MfePocFtpUser)@$(MfePocFtpHost) &lt;Tools\PuTTY\input.txt &gt; NUL 2&gt;&amp;1" />
     <Message Text="Completed SFTP of packages" Importance="high" />
   </Target>
 

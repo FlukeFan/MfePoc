@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using ZipDeploy;
 
 namespace MfePoc.Home
 {
@@ -23,6 +24,8 @@ namespace MfePoc.Home
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddZipDeploy();
+
             services
                 .AddControllersWithViews()
                 .AddRazorRuntimeCompilation();

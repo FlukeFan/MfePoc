@@ -21,7 +21,8 @@ function SetupSite($siteName) {
     $site = Get-Website | Where-Object { $_.Name -eq $siteName }
     if ($site -eq $null) {
         Write-Host "Creating IIS site $siteName"
-        New-IISSite -Name $siteName -PhysicalPath . -BindingInformation "*:80:$siteName"
+        $path = Get-Location
+        New-IISSite -Name $siteName -PhysicalPath $path -BindingInformation "*:80:$siteName"
     }
 
     Set-ItemProperty "IIS:\Sites\$siteName" -Name "ApplicationPool" -Value $siteName

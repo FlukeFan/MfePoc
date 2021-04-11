@@ -1,4 +1,5 @@
 using System.IO;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
@@ -50,7 +51,7 @@ namespace MfePoc.Home
             }
             else
             {
-                app.UseExceptionHandler();
+                app.UseExceptionHandler(new ExceptionHandlerOptions { ExceptionHandler = ctx => Task.CompletedTask });
             }
 
             app.UseStaticFiles();

@@ -27,7 +27,7 @@ function SetupSite($siteName) {
     Set-ItemProperty "IIS:\Sites\$siteName" -Name "ApplicationPool" -Value $siteName
 }
 
-iisreset
+Reset-IISServerManager -Confirm:$False
 
 SetupSite $siteName
 

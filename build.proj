@@ -7,6 +7,9 @@
 
   <Target Name="Package">
     <RemoveDir Directories="$(PackageFolder)" />
+    <MakeDir Directories="$(PackageFolder)" />
+    <Exec WorkingDirectory="Home" Command="dotnet publish -c Release -r win-x64 --self-contained" />
+    <ZipDirectory DestinationFile="$(PackageFolder)/home.publish.zip" SourceDirectory="Home/bin/Release/netcoreapp3.1/win-x64/publish" />
   </Target>
 
   <Target Name="Deploy" DependsOnTargets="Package">
@@ -16,7 +19,7 @@
     <Error Text="Need to set MfePocFtpRemoteDir variable" Condition="'$(MfePocFtpRemoteDir)'==''" />
     <ItemGroup>
       <FtpFileLines Include="cd $(MfePocFtpRemoteDir)" />
-      <FtpFileLines Include="put $(PackageFolder)/publish.zip publish.zip.tmp" />
+      <FtpFileLines Include="put $(PackageFolder)/home.publish.zip publish.zip.tmp" />
       <FtpFileLines Include="ren publish.zip.tmp publish.zip" />
     </ItemGroup>
     <WriteLinesToFile File="$(TEMP)/MfePocFtpBatch.txt" Lines="@(FtpFileLines)" Overwrite="true" />

@@ -19,3 +19,10 @@
 <p>
     This was rendered from process Id=@System.Diagnostics.Process.GetCurrentProcess().Id Framework=@System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
 </p>
+
+<!-- 'touch' each of the other projects in an iframe to start the processes up eagerly -->
+<iframe style="display:none" src="/Dashboard"></iframe>
+<iframe style="display:none" src="/BlazorSS1"></iframe>
+<iframe style="display:none" src="/BlazorSS2"></iframe>
+<iframe style="display:none" src="/BlazorCS1"></iframe>
+<iframe style="display:none" src="/BlazorCS2"></iframe>

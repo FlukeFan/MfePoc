@@ -14,6 +14,7 @@ function Unzip($folder) {
     if (Test-Path $zipFile) {
         Write-Host "unziping $zipFile"
         Expand-Archive -Path $zipFile -DestinationPath $folder -Force
+        Rename-Item -Path $zipFile -NewName "publish_unzipped.zip"
     }
 }
 
@@ -46,4 +47,3 @@ Unzip "blazorcs2"
 
 Reset-IISServerManager -Confirm:$False
 SetupSite $siteName "$((Get-Location).Path)\home"
-

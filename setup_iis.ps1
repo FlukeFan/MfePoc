@@ -9,6 +9,14 @@ $ErrorActionPreference = "Stop"
 Import-Module WebAdministration
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
 
+function Unzip($folder) {
+    $zipFile = "$folder\publish.zip"
+    if (Test-Path $zipFile) {
+        Write-Host "unziping $zipFile"
+        Expand-Archive -Path $zipFile -DestinationPath $folder -Force
+    }
+}
+
 function SetupSite($siteName, $path) {
 
     $sitePool = Get-IISAppPool -Name $siteName
@@ -28,6 +36,13 @@ function SetupSite($siteName, $path) {
     Set-ItemProperty "IIS:\Sites\$siteName" -Name "PhysicalPath" -Value $path
     Set-ItemProperty "IIS:\Sites\$siteName" -Name "ApplicationPool" -Value $siteName
 }
+
+Unzip "home"
+Unzip "dashboard"
+Unzip "blazorss1"
+Unzip "blazorss2"
+Unzip "blazorcs1"
+Unzip "blazorcs2"
 
 Reset-IISServerManager -Confirm:$False
 SetupSite $siteName "$((Get-Location).Path)\home"

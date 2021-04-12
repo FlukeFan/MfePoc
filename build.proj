@@ -19,14 +19,14 @@
     <Error Text="Need to set MfePocFtpRemoteDir variable" Condition="'$(MfePocFtpRemoteDir)'==''" />
     <ItemGroup>
       <FtpFileLines Include="cd $(MfePocFtpRemoteDir)" />
-      <FtpFileLines Include="rm publish.tmp%2A" />
-      <FtpFileLines Include="put $(PackageFolder)/home.publish.zip publish.tmp" />
-      <FtpFileLines Include="rm publish.zip%2A" />
-      <FtpFileLines Include="mv publish.tmp publish.zip" />
+      <FtpFileLines Include="mkdir home" />
+      <FtpFileLines Include="rm home/publish.tmp" />
+      <FtpFileLines Include="put $(PackageFolder)/home.publish.zip home/publish.tmp" />
+      <FtpFileLines Include="rm home/publish.zip" />
+      <FtpFileLines Include="mv home/publish.tmp home/publish.zip" />
     </ItemGroup>
-    <Message Importance="high" Text="@(FtpFileLines)" />
     <WriteLinesToFile File="$(TEMP)/MfePocFtpBatch.txt" Lines="@(FtpFileLines)" Overwrite="true" />
-    <Exec EchoOff="$(EchoOff)" Command="Tools\PuTTY\psftp.exe -pw $(MfePocFtpPassword) -b $(TEMP)/MfePocFtpBatch.txt $(MfePocFtpUser)@$(MfePocFtpHost) &lt;Tools\PuTTY\input.txt &gt; NUL 2&gt;&amp;1" />
+    <Exec EchoOff="$(EchoOff)" Command="Tools\PuTTY\psftp.exe -pw $(MfePocFtpPassword) -b $(TEMP)/MfePocFtpBatch.txt $(MfePocFtpUser)@$(MfePocFtpHost) -be &lt;Tools\PuTTY\input.txt &gt; NUL 2&gt;&amp;1" />
     <Message Text="Completed SFTP of packages" Importance="high" />
   </Target>
 

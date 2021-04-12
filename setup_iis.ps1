@@ -6,12 +6,10 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-Import-Module IISAdministration
+Import-Module WebAdministration
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
 
-function SetupSite($siteName) {
-
-    $path = (Get-Location).path
+function SetupSite($siteName, $path) {
 
     $sitePool = Get-IISAppPool -Name $siteName
     if ($sitePool -eq $null) {
@@ -32,5 +30,5 @@ function SetupSite($siteName) {
 }
 
 Reset-IISServerManager -Confirm:$False
-SetupSite $siteName
+SetupSite $siteName "$((Get-Location).Path)\home"
 

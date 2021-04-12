@@ -19,6 +19,8 @@
     <Error Text="Need to set MfePocFtpRemoteDir variable" Condition="'$(MfePocFtpRemoteDir)'==''" />
     <ItemGroup>
       <FtpFileLines Include="cd $(MfePocFtpRemoteDir)" />
+      <FtpFileLines Include="rm setup_iis.ps1" />
+      <FtpFileLines Include="put setup_iis.ps1 setup_iis.ps1" />
       <FtpFileLines Include="mkdir home" />
       <FtpFileLines Include="rm home/publish.tmp" />
       <FtpFileLines Include="put $(PackageFolder)/home.publish.zip home/publish.tmp" />

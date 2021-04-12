@@ -13,10 +13,4 @@
     <ProjectReference Include="..\Shared\MfePoc.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="setup_iis.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

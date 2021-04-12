@@ -35,14 +35,13 @@ function SetupSite($siteName, $path) {
     }
 
     Set-ItemProperty "IIS:\Sites\$siteName" -Name "PhysicalPath" -Value $path
-    Set-ItemProperty "IIS:\Sites\$siteName" -Name "ApplicationPool" -Value $siteName
+    Set-ItemProperty "IIS:\Sites\$siteName" -Name "applicationPool" -Value $siteName
     Set-ItemProperty "IIS:\AppPools\$siteName" -Name recycling.disallowOverlappingRotation -Value True
 }
 
 function SetupApp($siteName, $appName, $path) {
 
     $poolName = "$siteName.$appName"
-    Write-Host $poolName
     $pool = Get-IISAppPool -Name $poolName
     if ($pool -eq $null) {
         Write-Host "Creating IIS pool $poolName"
@@ -50,7 +49,15 @@ function SetupApp($siteName, $appName, $path) {
         New-WebAppPool -Name $poolName
     }
 
-    Set-ItemProperty "IIS:\AppPools\$poolName" -Name recycling.disallowOverlappingRotation -Value True
+    $app = Get-WebApplication -Site $siteName -Name $appName
+    if ($app -eq $null) {
+        Write-Host "Creating app $appName"
+        Reset-IISServerManager -Confirm:$False
+        New-WebApplication -Site $siteName -Name $appName -PhysicalPath $path
+    }
+
+    Set-ItemProperty "IIS:\Sites\$siteName\$appName" -Name "applicationPool" -Value $poolName
+    Set-ItemProperty "IIS:\AppPools\$poolName" -Name "recycling.disallowOverlappingRotation" -Value True
 }
 
 Unzip "home"
@@ -63,3 +70,7 @@ Unzip "blazorcs2"
 Reset-IISServerManager -Confirm:$False
 SetupSite $siteName "$((Get-Location).Path)\home"
 SetupApp $siteName "Dashboard" "$((Get-Location).Path)\dashboard"
+SetupApp $siteName "BlazorSS1" "$((Get-Location).Path)\blazorss1"
+SetupApp $siteName "BlazorSS2" "$((Get-Location).Path)\blazorss2"
+SetupApp $siteName "BlazorCS1" "$((Get-Location).Path)\blazorcs1"
+SetupApp $siteName "BlazorCS2" "$((Get-Location).Path)\blazorcs2"

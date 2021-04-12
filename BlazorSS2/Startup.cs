@@ -19,26 +19,27 @@ namespace MfePoc.BlazorSS2
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddRazorPages()
-                .AddRazorRuntimeCompilation();
+            var mvcBuilder = services.AddRazorPages();
+
+            if (HostEnvironment.IsDevelopment())
+            {
+                mvcBuilder.AddRazorRuntimeCompilation();
+
+                services.Configure<MvcRazorRuntimeCompilationOptions>(opt =>
+                {
+                    var libPath = Path.Combine(HostEnvironment.ContentRootPath, "..", "Shared");
+                    var libFullPath = Path.GetFullPath(libPath);
+                    opt.FileProviders.Add(new PhysicalFileProvider(libFullPath));
+                });
+            }
 
             services.AddServerSideBlazor();
-
-            services.Configure<MvcRazorRuntimeCompilationOptions>(opt =>
-            {
-                var libPath = Path.Combine(HostEnvironment.ContentRootPath, "..", "Shared");
-                var libFullPath = Path.GetFullPath(libPath);
-                opt.FileProviders.Add(new PhysicalFileProvider(libFullPath));
-            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
 
             app.UseStaticFiles();
             app.UsePathBase("/BlazorSS2");

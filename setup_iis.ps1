@@ -14,6 +14,9 @@ function Unzip($folder) {
     if (Test-Path $zipFile) {
         Write-Host "unziping $zipFile"
         Expand-Archive -Path $zipFile -DestinationPath $folder -Force
+        if (Test-Path "$folder\publish_unzipped.zip") {
+            Remove-Item "$folder\publish_unzipped.zip" -Force
+        }
         Rename-Item -Path $zipFile -NewName "publish_unzipped.zip"
     }
 }

@@ -36,6 +36,7 @@ function SetupSite($siteName, $path) {
 
     Set-ItemProperty "IIS:\Sites\$siteName" -Name "PhysicalPath" -Value $path
     Set-ItemProperty "IIS:\Sites\$siteName" -Name "ApplicationPool" -Value $siteName
+    Set-ItemProperty "IIS:\AppPools\$siteName" -Name recycling.disallowOverlappingRotation -Value True
 }
 
 Unzip "home"

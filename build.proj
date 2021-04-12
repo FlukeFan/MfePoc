@@ -19,9 +19,12 @@
     <Error Text="Need to set MfePocFtpRemoteDir variable" Condition="'$(MfePocFtpRemoteDir)'==''" />
     <ItemGroup>
       <FtpFileLines Include="cd $(MfePocFtpRemoteDir)" />
-      <FtpFileLines Include="put $(PackageFolder)/home.publish.zip publish.zip.tmp" />
-      <FtpFileLines Include="ren publish.zip.tmp publish.zip" />
+      <FtpFileLines Include="rm publish.tmp%2A" />
+      <FtpFileLines Include="put $(PackageFolder)/home.publish.zip publish.tmp" />
+      <FtpFileLines Include="rm publish.zip%2A" />
+      <FtpFileLines Include="mv publish.tmp publish.zip" />
     </ItemGroup>
+    <Message Importance="high" Text="@(FtpFileLines)" />
     <WriteLinesToFile File="$(TEMP)/MfePocFtpBatch.txt" Lines="@(FtpFileLines)" Overwrite="true" />
     <Exec EchoOff="$(EchoOff)" Command="Tools\PuTTY\psftp.exe -pw $(MfePocFtpPassword) -b $(TEMP)/MfePocFtpBatch.txt $(MfePocFtpUser)@$(MfePocFtpHost) &lt;Tools\PuTTY\input.txt &gt; NUL 2&gt;&amp;1" />
     <Message Text="Completed SFTP of packages" Importance="high" />

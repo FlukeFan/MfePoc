@@ -39,6 +39,20 @@ function SetupSite($siteName, $path) {
     Set-ItemProperty "IIS:\AppPools\$siteName" -Name recycling.disallowOverlappingRotation -Value True
 }
 
+function SetupApp($siteName, $appName, $path) {
+
+    $poolName = "$siteName.$appName"
+    Write-Host $poolName
+    $pool = Get-IISAppPool -Name $poolName
+    if ($pool -eq $null) {
+        Write-Host "Creating IIS pool $poolName"
+        Reset-IISServerManager -Confirm:$False
+        New-WebAppPool -Name $poolName
+    }
+
+    Set-ItemProperty "IIS:\AppPools\$poolName" -Name recycling.disallowOverlappingRotation -Value True
+}
+
 Unzip "home"
 Unzip "dashboard"
 Unzip "blazorss1"
@@ -48,3 +62,4 @@ Unzip "blazorcs2"
 
 Reset-IISServerManager -Confirm:$False
 SetupSite $siteName "$((Get-Location).Path)\home"
+SetupApp $siteName "Dashboard" "$((Get-Location).Path)\dashboard"

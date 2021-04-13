@@ -46,6 +46,8 @@ namespace MfePoc.Home
         {
             if (HostEnvironment.IsDevelopment())
                 app.UseDeveloperExceptionPage();
+            else
+                app.UseHttpsRedirection();
 
             app.UseStaticFiles();
             app.UseRouting();

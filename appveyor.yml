@@ -4,3 +4,6 @@ build_script:
   - dotnet --info
   - dotnet --version
   - dotnet msbuild build.proj /t:Deploy
+
+test_script:
+  - ps: write-host $env:CONFIGURATION

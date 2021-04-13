@@ -75,16 +75,13 @@
     <script src="~/_content/MfePoc.Shared/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/_content/MfePoc.Shared/js/site.js" asp-append-version="true"></script>
 
-    <!-- blazor server-side -->
+    @* blazor server-side *@
     @if (layoutModel.EnableBlazorServerSide)
     {
-        <script src="@(layoutModel.BaseUrl)_framework/blazor.server.js" autostart="false"></script>
-        <script>
-            window.Blazor.start();
-        </script>
+        <script src="@(layoutModel.BaseUrl)_framework/blazor.server.js"></script>
     }
 
-    <!-- blazor client-side -->
+    @* blazor client-side *@
     @if (layoutModel.EnableBlazorClientSide)
     {
         <script src="@(layoutModel.BaseUrl)_framework/blazor.webassembly.js"></script>

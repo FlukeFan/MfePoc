@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using ZipDeploy;
 
 namespace MfePoc.BlazorSS1
 {
@@ -19,6 +20,8 @@ namespace MfePoc.BlazorSS1
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddZipDeploy();
+
             var mvcBuilder = services.AddRazorPages();
 
             if (HostEnvironment.IsDevelopment())

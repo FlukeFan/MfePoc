@@ -10,10 +10,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Micro Frontends PoC in .NET - @layoutModel.Title</title>
-    @if (!hostingEnv.IsDevelopment())
-    {
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
-    }
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
     <link rel="stylesheet" href="~/_content/MfePoc.Shared/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/_content/MfePoc.Shared/css/site.css" />
     @if (!string.IsNullOrWhiteSpace(layoutModel.BaseUrl))
@@ -74,6 +71,11 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             Micro Frontends PoC in .NET
+            @if (!hostingEnv.IsProduction())
+            {
+                <span class="float-right">Environment=@hostingEnv.EnvironmentName</span>
+            }
+
         </div>
     </footer>
 
@@ -91,25 +93,22 @@
         <script src="@(layoutModel.BaseUrl)_framework/blazor.webassembly.js"></script>
     }
 
-    @if (!hostingEnv.IsDevelopment())
-    {
-        <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
-        <script>
-            window.cookieconsent.initialise({
-                "palette": {
-                    "popup": {
-                        "background": "#000"
-                    },
-                    "button": {
-                        "background": "#f1d600"
-                    }
-                },
-                "theme": "classic"
-            });
-        </script>
-    }
-
     @RenderSection("Scripts", required: false)
+
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+    <script>
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#000"
+                },
+                "button": {
+                    "background": "#f1d600"
+                }
+            },
+            "theme": "classic"
+        });
+    </script>
 
 </body>
 </html>

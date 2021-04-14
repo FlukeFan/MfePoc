@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 
-    @if (!hostingEnv.IsDevelopment())
+    @if (hostingEnv.IsProduction())
     {
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-25EMG3LPGN"></script>

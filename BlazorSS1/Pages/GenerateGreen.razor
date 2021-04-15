@@ -1,0 +1,23 @@
+﻿@page "/GenerateGreen"
+
+<button class="btn btn-primary" @onclick="Generate">Generate Green</button>
+
+<br />
+
+<a href="">Back</a>
+
+<StockLevels @ref="_stockLevels" />
+
+<HostDetail />
+
+@code {
+
+    protected StockLevels _stockLevels;
+
+    private void Generate()
+    {
+        Stock.GenerateGreen();
+        _stockLevels.Refresh();
+    }
+
+}

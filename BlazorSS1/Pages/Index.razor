@@ -1,13 +1,23 @@
 ﻿@page "/"
 
-<p>Blazor Server Side</p>
+<h2>Colour Service</h2>
 
-<p>This page is rendered using Blazor server-side, from module BlazorSS1</p>
+<p>This modules uses Blazor server-side, implemented in BlazorSS1</p>
 
-<Counter />
+<p>This is the colour service.  It generates and maintains the stock of Red, Green, and Blue.</p>
+
+<p>To generate colours, use:</p>
 
 <div>
-    <a href="Page2">Page 2</a>
+    <ul>
+        <li><a href="GenerateRed">Generate Red</a></li>
+        <li><a href="GenerateGreen">Generate Green</a></li>
+        <li><a href="GenerateBlue">Generate Blue</a></li>
+    </ul>
 </div>
+
+<StockLevels />
+
+<br/>
 
 <HostDetail />

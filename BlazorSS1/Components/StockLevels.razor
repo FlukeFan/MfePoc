@@ -1,0 +1,10 @@
+﻿<div>Red Level = <span style="background:#faa; padding: 2px;">@Stock.Red</span></div>
+<div>Green Level = <span style="background:#afa; padding: 2px;">@Stock.Green</span></div>
+<div>Blue Level = <span style="background:#aaf; padding: 2px;">@Stock.Blue</span></div>
+
+@code {
+    public void Refresh()
+    {
+        StateHasChanged();
+    }
+}

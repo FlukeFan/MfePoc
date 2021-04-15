@@ -1,5 +1,5 @@
 ﻿@namespace MfePoc.Shared.Views.Shared
-@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnv
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostEnv
 @using Microsoft.Extensions.Hosting
 @{
     var layoutModel = this.LayoutModel();
@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 
-    @if (hostingEnv.IsProduction())
+    @if (hostEnv.IsProduction())
     {
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-25EMG3LPGN"></script>
@@ -85,9 +85,9 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             Micro Frontends PoC in .NET
-            @if (!hostingEnv.IsProduction())
+            @if (!hostEnv.IsProduction())
             {
-                <span class="float-right pl-3 pr-3" style="background: wheat;">Environment=@hostingEnv.EnvironmentName</span>
+                <span class="float-right pl-3 pr-3" style="background: wheat;">Environment=@hostEnv.EnvironmentName</span>
             }
 
         </div>

@@ -1,7 +1,21 @@
 ﻿@page "/"
+@inject NavigationManager NavManager
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<p>
+    @_message
+</p>
+
+@code {
+
+    private string _message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var hub = await ClientHub.GetStartedHubAsync(NavManager);
+        _message = (string)await hub.InvokeCoreAsync(nameof(ClientHub.RequestHostDetail), typeof(string), new object[0]);
+    }
+} 

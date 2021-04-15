@@ -22,6 +22,7 @@ namespace MfePoc.BlazorCS1
         {
             services.AddZipDeploy();
 
+            services.AddSignalR();
             var mvcBuilder = services.AddRazorPages();
 
             if (HostEnvironment.IsDevelopment())
@@ -49,6 +50,7 @@ namespace MfePoc.BlazorCS1
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<CS1Hub>("/BlazorCS1/cs1hub");
                 endpoints.MapFallbackToPage("/_Host");
             });
         }

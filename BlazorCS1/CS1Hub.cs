@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
+using MfePoc.BlazorCS1.Client;
 using Microsoft.AspNetCore.SignalR;
 
 namespace MfePoc.BlazorCS1
 {
-    public class CS1Hub : Hub
+    public class CS1Hub : Hub, ClientHub.IRequests
     {
         public string RequestHostDetail()
         {

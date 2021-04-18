@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 
@@ -6,21 +7,44 @@ namespace MfePoc.BlazorCS1.Client
 {
     public class ClientHub
     {
-        private static HubConnection _hub;
+        private static SemaphoreSlim _lock = new SemaphoreSlim(1);
+        private static ClientHub _instance;
 
-        public static async Task<HubConnection> GetStartedHubAsync(NavigationManager navigationManager)
+        private HubConnection _hub;
+
+        public static async Task<ClientHub> GetStartedHubAsync(NavigationManager navigationManager)
         {
-            if (_hub != null)
-                return _hub;
+            await _lock.WaitAsync();
 
-            _hub = new HubConnectionBuilder()
-                .WithUrl(navigationManager.ToAbsoluteUri("BlazorCS1/cs1hub"))
-                .Build();
+            try
+            {
+                if (_instance != null)
+                    return _instance;
 
-            await _hub.StartAsync();
-            return _hub;
+                var hub = new HubConnectionBuilder()
+                    .WithUrl(navigationManager.ToAbsoluteUri("BlazorCS1/cs1hub"))
+                    .Build();
+
+                await hub.StartAsync();
+
+                _instance = new ClientHub { _hub = hub };
+                return _instance;
+            }
+            finally
+            {
+                _lock.Release();
+            }
         }
 
-        public class RequestHostDetail { }
+        public async Task<string> RequestHostDetailAsync()
+        {
+            var response = await _hub.InvokeCoreAsync(nameof(IRequests.RequestHostDetail), typeof(string), new object[0]);
+            return (string)response;
+        }
+
+        public interface IRequests
+        {
+            string RequestHostDetail();
+        }
     }
 }

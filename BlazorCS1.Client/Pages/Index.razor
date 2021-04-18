@@ -5,17 +5,4 @@
 
 Welcome to your new app.
 
-<p>
-    @_message
-</p>
-
-@code {
-
-    private string _message;
-
-    protected override async Task OnInitializedAsync()
-    {
-        var hub = await ClientHub.GetStartedHubAsync(NavManager);
-        _message = (string)await hub.InvokeCoreAsync(nameof(ClientHub.RequestHostDetail), typeof(string), new object[0]);
-    }
-} 
+<HostDetail />

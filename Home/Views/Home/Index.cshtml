@@ -24,10 +24,10 @@
     <script>
         $(function () {
             // 'touch' each of the other projects in an iframe to start the processes up eagerly
-            $.ajax('/Dashboard');
             $.ajax('/Generation');
+            $.ajax('/Mixing');
+            $.ajax('/Dashboard');
             $.ajax('/BlazorSS2');
-            $.ajax('/BlazorCS1');
             $.ajax('/BlazorCS2');
         });
     </script>

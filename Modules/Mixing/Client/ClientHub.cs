@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 
-namespace MfePoc.BlazorCS1.Client
+namespace MfePoc.Mixing.Client
 {
     public class ClientHub
     {
@@ -22,7 +22,7 @@ namespace MfePoc.BlazorCS1.Client
                     return _instance;
 
                 var hub = new HubConnectionBuilder()
-                    .WithUrl(navigationManager.ToAbsoluteUri("BlazorCS1/cs1hub"))
+                    .WithUrl(navigationManager.ToAbsoluteUri("Mixing/cs1hub"))
                     .Build();
 
                 await hub.StartAsync();

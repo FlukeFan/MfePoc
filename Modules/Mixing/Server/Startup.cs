@@ -7,7 +7,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using ZipDeploy;
 
-namespace MfePoc.BlazorCS1
+namespace MfePoc.Mixing.Server
 {
     public class Startup
     {
@@ -31,7 +31,7 @@ namespace MfePoc.BlazorCS1
 
                 services.Configure<MvcRazorRuntimeCompilationOptions>(opt =>
                 {
-                    var libPath = Path.Combine(HostEnvironment.ContentRootPath, "..", "Shared");
+                    var libPath = Path.Combine(HostEnvironment.ContentRootPath, "..", "..", "..", "Shared");
                     var libFullPath = Path.GetFullPath(libPath);
                     opt.FileProviders.Add(new PhysicalFileProvider(libFullPath));
                 });
@@ -50,7 +50,7 @@ namespace MfePoc.BlazorCS1
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<CS1Hub>("/BlazorCS1/cs1hub");
+                endpoints.MapHub<CS1Hub>("/Mixing/cs1hub");
                 endpoints.MapFallbackToPage("/_Host");
             });
         }

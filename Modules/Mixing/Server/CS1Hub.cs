@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
-using MfePoc.BlazorCS1.Client;
+using MfePoc.Mixing.Client;
 using Microsoft.AspNetCore.SignalR;
 
-namespace MfePoc.BlazorCS1
+namespace MfePoc.Mixing.Server
 {
     public class CS1Hub : Hub, ClientHub.IRequests
     {

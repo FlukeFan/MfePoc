@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost:8123/BlazorCS1",
+      "applicationUrl": "http://localhost:8123/Mixing",
       "sslPort": 0
     }
   },

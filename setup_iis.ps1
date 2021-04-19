@@ -72,8 +72,8 @@ Unzip "blazorcs2"
 
 Reset-IISServerManager -Confirm:$False
 SetupSite $siteName "$((Get-Location).Path)\home"
-SetupApp $siteName "Dashboard" "$((Get-Location).Path)\dashboard"
 SetupApp $siteName "Generation" "$((Get-Location).Path)\generation"
+SetupApp $siteName "Mixing" "$((Get-Location).Path)\mixing"
+SetupApp $siteName "Dashboard" "$((Get-Location).Path)\dashboard"
 SetupApp $siteName "BlazorSS2" "$((Get-Location).Path)\blazorss2"
-SetupApp $siteName "BlazorCS1" "$((Get-Location).Path)\blazorcs1"
 SetupApp $siteName "BlazorCS2" "$((Get-Location).Path)\blazorcs2"

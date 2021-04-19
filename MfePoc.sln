@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Home", "Home\MfePoc.Home.csproj", "{AB6C695D-5532-42E8-9216-AB746A199224}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{2AA7C477-4146-4591-825F-B8FAF1BED546}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Root", "_Root", "{2AA7C477-4146-4591-825F-B8FAF1BED546}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
@@ -33,9 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Generation", "Module
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mixing", "Mixing", "{00F1EFCA-5372-46C5-AC50-774080423827}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MfePoc.Mixing.Client", "Modules\Mixing\Client\MfePoc.Mixing.Client.csproj", "{410FFDAD-F678-4F9E-9654-7E01DD20F8C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Mixing.Client", "Modules\Mixing\Client\MfePoc.Mixing.Client.csproj", "{410FFDAD-F678-4F9E-9654-7E01DD20F8C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MfePoc.Mixing.Server", "Modules\Mixing\Server\MfePoc.Mixing.Server.csproj", "{6D06EE06-B440-4908-8021-9460AE7E2CFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Mixing.Server", "Modules\Mixing\Server\MfePoc.Mixing.Server.csproj", "{6D06EE06-B440-4908-8021-9460AE7E2CFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

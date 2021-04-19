@@ -65,7 +65,7 @@ function SetupApp($siteName, $appName, $path) {
 
 Unzip "home"
 Unzip "dashboard"
-Unzip "blazorss1"
+Unzip "generation"
 Unzip "blazorss2"
 Unzip "blazorcs1"
 Unzip "blazorcs2"
@@ -73,7 +73,7 @@ Unzip "blazorcs2"
 Reset-IISServerManager -Confirm:$False
 SetupSite $siteName "$((Get-Location).Path)\home"
 SetupApp $siteName "Dashboard" "$((Get-Location).Path)\dashboard"
-SetupApp $siteName "BlazorSS1" "$((Get-Location).Path)\blazorss1"
+SetupApp $siteName "Generation" "$((Get-Location).Path)\generation"
 SetupApp $siteName "BlazorSS2" "$((Get-Location).Path)\blazorss2"
 SetupApp $siteName "BlazorCS1" "$((Get-Location).Path)\blazorcs1"
 SetupApp $siteName "BlazorCS2" "$((Get-Location).Path)\blazorcs2"

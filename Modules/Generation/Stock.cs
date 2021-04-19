@@ -1,4 +1,4 @@
-﻿namespace MfePoc.BlazorSS1
+﻿namespace MfePoc.Generation
 {
     public static class Stock
     {

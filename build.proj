@@ -10,13 +10,13 @@
     <MakeDir Directories="$(PackageFolder)" />
     <Exec WorkingDirectory="Home" Command="dotnet publish -c Release -r win-x64 --self-contained" />
     <Exec WorkingDirectory="Dashboard" Command="dotnet publish -c Release -r win-x64 --self-contained" />
-    <Exec WorkingDirectory="BlazorSS1" Command="dotnet publish -c Release -r win-x64 --self-contained" />
+    <Exec WorkingDirectory="Modules/Generation" Command="dotnet publish -c Release -r win-x64 --self-contained" />
     <Exec WorkingDirectory="BlazorSS2" Command="dotnet publish -c Release -r win-x64 --self-contained" />
     <Exec WorkingDirectory="BlazorCS1" Command="dotnet publish -c Release -r win-x64 --self-contained" />
     <Exec WorkingDirectory="BlazorCS2" Command="dotnet publish -c Release -r win-x64 --self-contained" />
     <ZipDirectory DestinationFile="$(PackageFolder)/home.publish.zip" SourceDirectory="Home/bin/Release/netcoreapp3.1/win-x64/publish" />
     <ZipDirectory DestinationFile="$(PackageFolder)/dashboard.publish.zip" SourceDirectory="Dashboard/bin/Release/netcoreapp3.1/win-x64/publish" />
-    <ZipDirectory DestinationFile="$(PackageFolder)/blazorss1.publish.zip" SourceDirectory="BlazorSS1/bin/Release/netcoreapp3.1/win-x64/publish" />
+    <ZipDirectory DestinationFile="$(PackageFolder)/generation.publish.zip" SourceDirectory="Modules/Generation/bin/Release/netcoreapp3.1/win-x64/publish" />
     <ZipDirectory DestinationFile="$(PackageFolder)/blazorss2.publish.zip" SourceDirectory="BlazorSS2/bin/Release/netcoreapp3.1/win-x64/publish" />
     <ZipDirectory DestinationFile="$(PackageFolder)/blazorcs1.publish.zip" SourceDirectory="BlazorCS1/bin/Release/net5.0/win-x64/publish" />
     <ZipDirectory DestinationFile="$(PackageFolder)/blazorcs2.publish.zip" SourceDirectory="BlazorCS2/bin/Release/net5.0/win-x64/publish" />
@@ -44,11 +44,11 @@
       <FtpFileLines Include="rm dashboard/publish.zip" />
       <FtpFileLines Include="mv dashboard/publish.tmp dashboard/publish.zip" />
 
-      <FtpFileLines Include="mkdir blazorss1" />
-      <FtpFileLines Include="rm blazorss1/publish.tmp" />
-      <FtpFileLines Include="put $(PackageFolder)/blazorss1.publish.zip blazorss1/publish.tmp" />
-      <FtpFileLines Include="rm blazorss1/publish.zip" />
-      <FtpFileLines Include="mv blazorss1/publish.tmp blazorss1/publish.zip" />
+      <FtpFileLines Include="mkdir generation" />
+      <FtpFileLines Include="rm generation/publish.tmp" />
+      <FtpFileLines Include="put $(PackageFolder)/generation.publish.zip generation/publish.tmp" />
+      <FtpFileLines Include="rm generation/publish.zip" />
+      <FtpFileLines Include="mv generation/publish.tmp generation/publish.zip" />
 
       <FtpFileLines Include="mkdir blazorss2" />
       <FtpFileLines Include="rm blazorss2/publish.tmp" />

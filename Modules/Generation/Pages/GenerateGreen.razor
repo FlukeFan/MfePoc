@@ -1,10 +1,14 @@
-﻿@page "/GenerateBlue"
+﻿@page "/GenerateGreen"
 
-<button class="btn btn-primary" @onclick="Generate">Generate Blue</button>
+<button class="btn btn-primary" @onclick="Generate">Generate Green</button>
 
-<br/>
+<br />
+<br />
 
 <a href="">Back</a>
+
+<br />
+<br />
 
 <StockLevels @ref="_stockLevels" />
 
@@ -16,7 +20,7 @@
 
     private void Generate()
     {
-        Stock.GenerateBlue();
+        Stock.GenerateGreen();
         _stockLevels.Refresh();
     }
 

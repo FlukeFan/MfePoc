@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace MfePoc.BlazorSS1
+namespace MfePoc.Generation
 {
     public class Program
     {

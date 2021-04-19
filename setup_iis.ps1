@@ -64,10 +64,10 @@ function SetupApp($siteName, $appName, $path) {
 }
 
 Unzip "home"
-Unzip "dashboard"
 Unzip "generation"
+Unzip "mixing"
+Unzip "dashboard"
 Unzip "blazorss2"
-Unzip "blazorcs1"
 Unzip "blazorcs2"
 
 Reset-IISServerManager -Confirm:$False

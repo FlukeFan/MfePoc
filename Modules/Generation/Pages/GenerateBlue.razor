@@ -1,4 +1,5 @@
 ﻿@page "/GenerateBlue"
+@inject StockDb StockDb
 
 <button class="btn btn-primary" @onclick="Generate">Generate Blue</button>
 
@@ -20,7 +21,7 @@
 
     private void Generate()
     {
-        Stock.GenerateBlue();
+        StockDb.GenerateBlue();
         _stockLevels.Refresh();
     }
 

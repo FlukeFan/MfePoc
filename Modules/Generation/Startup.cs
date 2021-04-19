@@ -21,6 +21,7 @@ namespace MfePoc.Generation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddZipDeploy();
+            services.AddSingleton(new StockDb());
 
             var mvcBuilder = services.AddRazorPages();
 

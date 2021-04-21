@@ -22,6 +22,7 @@ namespace MfePoc.Dashboard
         {
             services.AddZipDeploy();
 
+            services.AddSignalR();
             var mvcBuilder = services.AddControllersWithViews();
 
             if (HostEnvironment.IsDevelopment())
@@ -47,6 +48,8 @@ namespace MfePoc.Dashboard
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<DashboardHub>("/hub");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

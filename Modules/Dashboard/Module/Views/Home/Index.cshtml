@@ -15,7 +15,17 @@
     <script>
 
         $(function () {
-            notify("Dashboard started");
+            var hub = new signalR.HubConnectionBuilder()
+                .withUrl("/Dashboard/hub")
+                .build();
+
+            hub.on("notify", function (message) {
+                notify(message);
+            });
+
+            hub.start().then(function () {
+                notify("Dashboard started");
+            });
         });
 
         function notify(message) {

@@ -10,3 +10,17 @@
 <p>
     This was rendered from process Id=@System.Diagnostics.Process.GetCurrentProcess().Id Framework=@System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
 </p>
+
+@section Scripts {
+    <script>
+
+        $(function () {
+            notify("Dashboard started");
+        });
+
+        function notify(message) {
+            $.notify(message, { delay: 350, timer: 10, allow_dismiss: false, placement: { from: "bottom", align: "right" } });
+        }
+
+    </script>
+} 

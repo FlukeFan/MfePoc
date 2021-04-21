@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\MfePoc.Shared.csproj" />
+    <ProjectReference Include="..\..\..\Shared\MfePoc.Shared.csproj" />
   </ItemGroup>
 
 </Project>

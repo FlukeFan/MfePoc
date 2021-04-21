@@ -11,13 +11,13 @@
     <Exec WorkingDirectory="Home" Command="dotnet publish -c Release -r win-x64 --self-contained" />
     <Exec WorkingDirectory="Modules/Generation/Module" Command="dotnet publish -c Release -r win-x64 --self-contained" />
     <Exec WorkingDirectory="Modules/Mixing/Server" Command="dotnet publish -c Release -r win-x64 --self-contained" />
-    <Exec WorkingDirectory="Dashboard" Command="dotnet publish -c Release -r win-x64 --self-contained" />
+    <Exec WorkingDirectory="Modules/Dashboard/Module" Command="dotnet publish -c Release -r win-x64 --self-contained" />
     <Exec WorkingDirectory="BlazorSS2" Command="dotnet publish -c Release -r win-x64 --self-contained" />
     <Exec WorkingDirectory="BlazorCS2" Command="dotnet publish -c Release -r win-x64 --self-contained" />
     <ZipDirectory DestinationFile="$(PackageFolder)/home.publish.zip" SourceDirectory="Home/bin/Release/netcoreapp3.1/win-x64/publish" />
     <ZipDirectory DestinationFile="$(PackageFolder)/generation.publish.zip" SourceDirectory="Modules/Generation/Module/bin/Release/netcoreapp3.1/win-x64/publish" />
     <ZipDirectory DestinationFile="$(PackageFolder)/mixing.publish.zip" SourceDirectory="Modules/Mixing/Server/bin/Release/net5.0/win-x64/publish" />
-    <ZipDirectory DestinationFile="$(PackageFolder)/dashboard.publish.zip" SourceDirectory="Dashboard/bin/Release/netcoreapp3.1/win-x64/publish" />
+    <ZipDirectory DestinationFile="$(PackageFolder)/dashboard.publish.zip" SourceDirectory="Modules/Dashboard/Module/bin/Release/netcoreapp3.1/win-x64/publish" />
     <ZipDirectory DestinationFile="$(PackageFolder)/blazorss2.publish.zip" SourceDirectory="BlazorSS2/bin/Release/netcoreapp3.1/win-x64/publish" />
     <ZipDirectory DestinationFile="$(PackageFolder)/blazorcs2.publish.zip" SourceDirectory="BlazorCS2/bin/Release/net5.0/win-x64/publish" />
   </Target>

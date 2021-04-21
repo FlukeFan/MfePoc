@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace MfePoc.Mixing.Server
 {
-    public class CS1Hub : Hub, ClientHub.IRequests
+    public class MixingHub : Hub, ClientHub.IRequests
     {
         public string RequestHostDetail()
         {

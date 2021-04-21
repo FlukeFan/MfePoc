@@ -22,7 +22,7 @@ namespace MfePoc.Mixing.Client
                     return _instance;
 
                 var hub = new HubConnectionBuilder()
-                    .WithUrl(navigationManager.ToAbsoluteUri("Mixing/cs1hub"))
+                    .WithUrl(navigationManager.ToAbsoluteUri("hub"))
                     .Build();
 
                 await hub.StartAsync();

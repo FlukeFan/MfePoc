@@ -46,7 +46,6 @@ namespace MfePoc.Generation
                 app.UseDeveloperExceptionPage();
 
             app.UseStaticFiles();
-            app.UsePathBase("/Generation");
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

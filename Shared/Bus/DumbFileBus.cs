@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -15,7 +16,9 @@ namespace MfePoc.Shared.Bus
 
         private string _name;
         private string _queueFolder;
+        private Timer _timer;
         private FileSystemWatcher _fsw;
+        private int _nextTimeout;
 
         public DumbFileBus(
             ILogger<DumbFileBus> logger,
@@ -52,7 +55,7 @@ namespace MfePoc.Shared.Bus
             }
         }
 
-        public async Task StartAsync(string name)
+        public Task StartAsync(string name)
         {
             _name = name;
             _queueFolder = Path.Combine(_busFolder, _name);
@@ -62,20 +65,23 @@ namespace MfePoc.Shared.Bus
 
             _logger.LogInformation($"Incoming messages folder: {_queueFolder}");
 
+            _timer = new Timer(s => ProcessMessages());
+            TriggerTimer(immediate: true);
+
             _fsw = new FileSystemWatcher(_queueFolder, "*.txt");
             _fsw.Renamed += (s, e) => OnMessageDetected();
             _fsw.Changed += (s, e) => OnMessageDetected();
             _fsw.Created += (s, e) => OnMessageDetected();
             _fsw.Error += (s, e) => OnMessageDetected();
+            _fsw.EnableRaisingEvents = true;
 
-            await Task.Run(OnMessageDetected);
+            return Task.CompletedTask;
         }
 
-        private void OnMessageDetected()
+        private void ProcessMessages()
         {
-            lock (_fsw)
+            lock (_timer)
             {
-                _fsw.EnableRaisingEvents = false;
                 object message = null;
 
                 try
@@ -121,19 +127,26 @@ namespace MfePoc.Shared.Bus
                 }
                 finally
                 {
-                    try
-                    {
-                        if (GetMessages().Length > 1)
-                            Task.Run(OnMessageDetected);
-                        else
-                            _fsw.EnableRaisingEvents = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError(ex, $"Error in finally '{message}'");
-                    }
+                    var immediate = GetMessages().Length > 0;
+                    TriggerTimer(immediate);
                 }
             }
+        }
+
+        private void TriggerTimer(bool immediate = false)
+        {
+            if (immediate)
+                _nextTimeout = 1;
+
+            _timer.Change(_nextTimeout, Timeout.Infinite);
+
+            if (_nextTimeout < 60000)
+                _nextTimeout = _nextTimeout * 2;
+        }
+
+        private void OnMessageDetected()
+        {
+            TriggerTimer(immediate: true);
         }
 
         private string[] GetMessages()

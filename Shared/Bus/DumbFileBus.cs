@@ -99,13 +99,14 @@ namespace MfePoc.Shared.Bus
                 var messageType = message.GetType();
                 _logger.LogInformation($"Received: {messageType}");
 
-                var handlerType = typeof(IHandler<>).MakeGenericType(messageType);
+                var handlerType = typeof(IHandle<>).MakeGenericType(messageType);
                 var handler = _services.GetService(handlerType);
 
                 if (handler != null)
                 {
-                    var method = handlerType.GetMethod("Handle");
-                    method.Invoke(handler, new[] { message });
+                    var method = handlerType.GetMethod("HandleAsync");
+                    var task = (Task)method.Invoke(handler, new[] { message });
+                    task.GetAwaiter().GetResult();
                 }
 
                 if (messageFiles.Length > 1)

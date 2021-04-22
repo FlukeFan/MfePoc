@@ -1,4 +1,5 @@
 using System.IO;
+using MfePoc.Shared.Bus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
@@ -22,7 +23,9 @@ namespace MfePoc.Dashboard
         {
             services.AddZipDeploy();
 
+            services.AddDumbFileBus("Dashboard", GetType().Assembly);
             services.AddSignalR();
+
             var mvcBuilder = services.AddControllersWithViews();
 
             if (HostEnvironment.IsDevelopment())

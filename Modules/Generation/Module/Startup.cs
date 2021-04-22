@@ -23,7 +23,7 @@ namespace MfePoc.Generation
         {
             services.AddZipDeploy();
 
-            services.AddDumbFileBus("Generation");
+            services.AddDumbFileBus("Generation", GetType().Assembly);
             services.AddSingleton<StockDb>();
 
             var mvcBuilder = services.AddRazorPages();

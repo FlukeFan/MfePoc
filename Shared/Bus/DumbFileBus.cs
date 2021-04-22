@@ -65,58 +65,80 @@ namespace MfePoc.Shared.Bus
             _fsw = new FileSystemWatcher(_queueFolder, "*.txt");
             _fsw.Renamed += (s, e) => OnMessageDetected();
             _fsw.Changed += (s, e) => OnMessageDetected();
+            _fsw.Created += (s, e) => OnMessageDetected();
+            _fsw.Deleted += (s, e) => OnMessageDetected();
+            _fsw.Error += (s, e) => OnMessageDetected();
 
             await Task.Run(OnMessageDetected);
-            _fsw.EnableRaisingEvents = true;
         }
 
         private void OnMessageDetected()
         {
-            object message = null;
-
-            try
+            lock (_fsw)
             {
-                var messageFiles = Directory.GetFiles(_queueFolder, "*.txt");
+                _fsw.EnableRaisingEvents = false;
+                object message = null;
 
-                _logger.LogInformation($"Messages: {messageFiles.Length}");
-
-                var firstMessageFile = messageFiles
-                    .OrderBy(m => m)
-                    .FirstOrDefault();
-
-                if (firstMessageFile == null)
-                    return;
-
-                var messageJson = File.ReadAllText(firstMessageFile);
-                File.Delete(firstMessageFile); // non transactional - if we fail after here, message is (deliberately) lost
-
-                message = JsonConvert.DeserializeObject(messageJson, new JsonSerializerSettings
+                try
                 {
-                    TypeNameHandling = TypeNameHandling.All,
-                });
+                    var messageFiles = GetMessages();
+
+                    _logger.LogInformation($"Messages: {messageFiles.Length}");
+
+                    var firstMessageFile = messageFiles
+                        .OrderBy(m => m)
+                        .FirstOrDefault();
+
+                    if (firstMessageFile == null)
+                        return;
+
+                    var messageJson = File.ReadAllText(firstMessageFile);
+                    File.Delete(firstMessageFile); // non transactional - if we fail after here, message is (deliberately) lost
+
+                    message = JsonConvert.DeserializeObject(messageJson, new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.All,
+                    });
 
 
-                var messageType = message.GetType();
-                _logger.LogInformation($"Received: {messageType}");
+                    var messageType = message.GetType();
+                    _logger.LogInformation($"Received: {messageType}");
 
-                var handlerType = typeof(IHandle<>).MakeGenericType(messageType);
-                var handler = _services.GetService(handlerType);
+                    var handlerType = typeof(IHandle<>).MakeGenericType(messageType);
+                    var handler = _services.GetService(handlerType);
 
-                if (handler != null)
-                {
-                    var method = handlerType.GetMethod("HandleAsync");
-                    var task = (Task)method.Invoke(handler, new[] { message });
-                    task.GetAwaiter().GetResult();
+                    if (handler != null)
+                    {
+                        var method = handlerType.GetMethod("HandleAsync");
+                        Task.Run(() =>
+                        {
+                            var task = (Task)method.Invoke(handler, new[] { message });
+                            task.GetAwaiter().GetResult();
+                        });
+                    }
                 }
-
-                if (messageFiles.Length > 1)
-                    Task.Run(OnMessageDetected);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error handling '{message}'");
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, $"Error handling '{message}'");
+                }
+                finally
+                {
+                    try
+                    {
+                        if (GetMessages().Length > 1)
+                            Task.Run(OnMessageDetected);
+                    }
+                    finally
+                    {
+                        _fsw.EnableRaisingEvents = true;
+                    }
+                }
             }
         }
-    }
 
+        private string[] GetMessages()
+        {
+            return Directory.GetFiles(_queueFolder, "*.txt");
+        }
+    }
 }

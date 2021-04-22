@@ -1,4 +1,5 @@
 using System.IO;
+using MfePoc.Shared.Bus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
@@ -21,7 +22,9 @@ namespace MfePoc.Generation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddZipDeploy();
-            services.AddSingleton(new StockDb());
+
+            services.AddDumbFileBus("Generation");
+            services.AddSingleton<StockDb>();
 
             var mvcBuilder = services.AddRazorPages();
 

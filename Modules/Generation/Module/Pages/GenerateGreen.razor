@@ -19,9 +19,9 @@
 
     protected StockLevels _stockLevels;
 
-    private void Generate()
+    private async Task Generate()
     {
-        StockDb.GenerateGreen();
+        await StockDb.GenerateGreenAsync();
         _stockLevels.Refresh();
     }
 

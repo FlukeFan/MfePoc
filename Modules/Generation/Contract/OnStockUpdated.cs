@@ -1,6 +1,6 @@
 ﻿namespace MfePoc.Generation.Contract
 {
-    public class OnPrimaryColourStockUpdated
+    public class OnStockUpdated
     {
         public int Red { get; set; }
         public int Green { get; set; }

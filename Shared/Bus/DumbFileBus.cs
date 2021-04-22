@@ -136,9 +136,12 @@ namespace MfePoc.Shared.Bus
         private void TriggerTimer(bool immediate = false)
         {
             if (immediate)
-                _nextTimeout = 1;
+                _nextTimeout = 0;
 
             _timer.Change(_nextTimeout, Timeout.Infinite);
+
+            if (_nextTimeout < 1000)
+                _nextTimeout = 200;
 
             if (_nextTimeout < 60000)
                 _nextTimeout = _nextTimeout * 2;

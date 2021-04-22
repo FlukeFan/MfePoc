@@ -66,7 +66,6 @@ namespace MfePoc.Shared.Bus
             _fsw.Renamed += (s, e) => OnMessageDetected();
             _fsw.Changed += (s, e) => OnMessageDetected();
             _fsw.Created += (s, e) => OnMessageDetected();
-            _fsw.Deleted += (s, e) => OnMessageDetected();
             _fsw.Error += (s, e) => OnMessageDetected();
 
             await Task.Run(OnMessageDetected);
@@ -100,7 +99,6 @@ namespace MfePoc.Shared.Bus
                         TypeNameHandling = TypeNameHandling.All,
                     });
 
-
                     var messageType = message.GetType();
                     _logger.LogInformation($"Received: {messageType}");
 
@@ -110,10 +108,10 @@ namespace MfePoc.Shared.Bus
                     if (handler != null)
                     {
                         var method = handlerType.GetMethod("HandleAsync");
-                        Task.Run(() =>
+                        Task.Run(async () =>
                         {
                             var task = (Task)method.Invoke(handler, new[] { message });
-                            task.GetAwaiter().GetResult();
+                            await task;
                         });
                     }
                 }
@@ -127,10 +125,12 @@ namespace MfePoc.Shared.Bus
                     {
                         if (GetMessages().Length > 1)
                             Task.Run(OnMessageDetected);
+                        else
+                            _fsw.EnableRaisingEvents = true;
                     }
-                    finally
+                    catch (Exception ex)
                     {
-                        _fsw.EnableRaisingEvents = true;
+                        _logger.LogError(ex, $"Error in finally '{message}'");
                     }
                 }
             }

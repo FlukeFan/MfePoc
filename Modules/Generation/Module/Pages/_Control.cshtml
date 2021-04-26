@@ -1,0 +1,30 @@
+﻿@page "/Control"
+@namespace MfePoc.Generation.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/_content/MfePoc.Shared/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/_content/MfePoc.Shared/css/site.css" />
+    <base href="/Generation/" />
+</head>
+<body>
+
+    @{
+        var controlName = Request.Query["control"];
+        var controlType = typeof(App).Assembly.GetTypes().Single(t => t.Name == controlName);
+    }
+    <p>
+        <component type="controlType" render-mode="Server" />
+    </p>
+
+    <script src="~/_content/MfePoc.Shared/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/_content/MfePoc.Shared/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/_content/MfePoc.Shared/js/site.js" asp-append-version="true"></script>
+
+    <script src="/Generation/_framework/blazor.server.js"></script>
+
+</body>
+</html>

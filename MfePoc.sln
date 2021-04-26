@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dashboard", "Dashboard", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Dashboard", "Modules\Dashboard\Module\MfePoc.Dashboard.csproj", "{633B8569-4F2E-421E-A34F-42B27CD6F337}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MfePoc.Generation.Contract", "Modules\Generation\Contract\MfePoc.Generation.Contract.csproj", "{CCF8C9E9-AC0B-44B3-8B95-807C77F47FDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Generation.Contract", "Modules\Generation\Contract\MfePoc.Generation.Contract.csproj", "{CCF8C9E9-AC0B-44B3-8B95-807C77F47FDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

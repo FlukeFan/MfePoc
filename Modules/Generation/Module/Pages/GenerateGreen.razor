@@ -1,7 +1,7 @@
 ﻿@page "/GenerateGreen"
 @inject StockDb StockDb
 
-<button class="btn btn-success" @onclick="Generate">Generate Green</button>
+<GreenButton StockLevels=@(() => _stockLevels) />
 
 <br />
 <br />
@@ -17,12 +17,6 @@
 
 @code {
 
-    protected StockLevels _stockLevels;
-
-    private async Task Generate()
-    {
-        await StockDb.GenerateGreenAsync();
-        _stockLevels.Refresh();
-    }
+    private StockLevels _stockLevels;
 
 }

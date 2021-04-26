@@ -1,0 +1,26 @@
+﻿@inject StockDb StockDb
+
+<button class="@StockButtonCss" @onclick=@DoStockAction>@Text</button>
+
+@code {
+
+    [Parameter]
+    public string StockButtonCss { get; set; }
+
+    [Parameter]
+    public string Text { get; set; }
+
+    [Parameter]
+    public Func<StockDb, Task> StockActionAsync { get; set; }
+
+    [Parameter]
+    public Func<StockLevels> StockLevels { get; set; }
+
+    private async Task DoStockAction()
+    {
+        await StockActionAsync(StockDb);
+
+        if (StockLevels != null)
+            StockLevels().Refresh();
+    }
+}

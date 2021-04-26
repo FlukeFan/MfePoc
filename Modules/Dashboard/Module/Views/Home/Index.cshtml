@@ -1,14 +1,41 @@
-﻿@{
+﻿@using MfePoc.Generation.Contract 
+@{
     this.SetAppLayout(
         title: "Dashboard",
         baseUrl: "/Dashboard/");
 }
 
 <p>
-    This is the colour factory Dashboard, and is implemented using server-side MVC.
+    This is the colour factory Dashboard.
 </p>
 <p>
-    This was rendered from process Id=@System.Diagnostics.Process.GetCurrentProcess().Id Framework=@System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
+    The main view is rendered using server-side MVC, but the colour controls are served (in iFrames) from
+    the other modules.
+</p>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            @GenerationControls.RedGenerator()
+            <br />
+            @GenerationControls.GreenGenerator()
+            <br />
+            @GenerationControls.BlueGenerator()
+        </div>
+
+        <div class="col-sm-6">
+            @GenerationControls.StockLevels()
+        </div>
+
+    </div>
+
+</div>
+
+
+<p>
+    This page was rendered from process Id=@System.Diagnostics.Process.GetCurrentProcess().Id Framework=@System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
 </p>
 
 @section Scripts {

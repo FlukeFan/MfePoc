@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="~/_content/MfePoc.Shared/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/_content/MfePoc.Shared/css/site.css" />
     <base href="/Generation/" />
+
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -16,9 +22,7 @@
         var controlName = Request.Query["control"];
         var controlType = typeof(App).Assembly.GetTypes().Single(t => t.Name == controlName);
     }
-    <p>
-        <component type="controlType" render-mode="Server" />
-    </p>
+    <component type="controlType" render-mode="Server" />
 
     <script src="~/_content/MfePoc.Shared/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/_content/MfePoc.Shared/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

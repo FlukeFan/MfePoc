@@ -1,0 +1,33 @@
+﻿
+@RenderButton()
+
+<br />
+<br />
+
+<a href="">Back</a>
+
+<br />
+<br />
+
+<StockLevels @ref="_stockLevels" />
+
+<HostDetail />
+
+@code {
+
+    private StockLevels _stockLevels;
+
+    [Parameter]
+    public Type Generate { get; set; }
+
+    private RenderFragment RenderButton()
+    {
+        return builder =>
+        {
+            builder.OpenComponent(0, Generate);
+            Func<StockLevels> stockLevels = () => _stockLevels;
+            builder.AddAttribute(1, nameof(IGenerationButton.StockLevels), stockLevels);
+            builder.CloseComponent();
+        };
+    }
+}

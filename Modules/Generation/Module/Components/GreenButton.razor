@@ -1,14 +1,13 @@
-﻿
-<StockButton
-             StockButtonCss="btn btn-success"
+﻿@implements IGenerationButton
+
+<StockButton StockButtonCss="btn btn-success"
              Text="Generate Green"
              StockActionAsync=@(async db => await db.GenerateGreenAsync())
-             StockLevels=@StockLevels
-             />
+             StockLevels=@StockLevels />
 
 @code {
 
     [Parameter]
-    public Func<StockLevels> StockLevels { get; set; }
+    public Func<StockLevels> StockLevels { get; set; } = () => null;
 
 }

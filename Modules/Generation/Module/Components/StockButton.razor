@@ -19,8 +19,6 @@
     private async Task DoStockAction()
     {
         await StockActionAsync(StockDb);
-
-        if (StockLevels != null)
-            StockLevels().Refresh();
+        StockLevels?.Invoke()?.Refresh();
     }
 }

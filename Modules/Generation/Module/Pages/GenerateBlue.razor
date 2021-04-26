@@ -1,22 +1,3 @@
 ﻿@page "/GenerateBlue"
-@inject StockDb StockDb
 
-<BlueButton StockLevels=@(() => _stockLevels) />
-
-<br />
-<br />
-
-<a href="">Back</a>
-
-<br />
-<br />
-
-<StockLevels @ref="_stockLevels" />
-
-<HostDetail />
-
-@code {
-
-    private StockLevels _stockLevels;
-
-}
+<GenerationPage Generate=@(typeof(BlueButton)) />

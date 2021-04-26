@@ -113,7 +113,7 @@ namespace MfePoc.Shared.Bus
 
                     if (handler != null)
                     {
-                        var method = handlerType.GetMethod("HandleAsync");
+                        var method = handlerType.GetMethod(nameof(IHandle<object>.HandleAsync));
                         Task.Run(async () =>
                         {
                             var task = (Task)method.Invoke(handler, new[] { message });

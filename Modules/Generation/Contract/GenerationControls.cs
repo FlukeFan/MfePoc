@@ -6,7 +6,7 @@ namespace MfePoc.Generation.Contract
     {
         public static HtmlString StockLevels()
         {
-            return FramedControl("StockLevels", 150, 80);
+            return FramedControl("StockLevels", 156, 52);
         }
 
         public static HtmlString RedGenerator()

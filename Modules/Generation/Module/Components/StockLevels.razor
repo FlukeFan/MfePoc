@@ -1,9 +1,17 @@
 ﻿@implements IDisposable
 @inject StockDb StockDb
 
-<div>Red Level = <span style="background:#faa; padding: 2px;">@StockDb.Red</span></div>
-<div>Green Level = <span style="background:#afa; padding: 2px;">@StockDb.Green</span></div>
-<div>Blue Level = <span style="background:#aaf; padding: 2px;">@StockDb.Blue</span></div>
+<div class="bg-danger text-white stock-counter">
+    @StockDb.Red
+</div>
+
+<div class="bg-success text-white stock-counter">
+    @StockDb.Green
+</div>
+
+<div class="bg-primary text-white stock-counter">
+    @StockDb.Blue
+</div>
 
 @code {
 

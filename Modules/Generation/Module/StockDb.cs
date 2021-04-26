@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MfePoc.Generation.Contract;
 using MfePoc.Shared.Bus;
 
@@ -7,6 +8,8 @@ namespace MfePoc.Generation
     public class StockDb
     {
         private readonly IBus _bus;
+
+        public event Func<Task> OnStockUpdateAsync;
 
         public StockDb(IBus bus)
         {
@@ -37,6 +40,8 @@ namespace MfePoc.Generation
 
         private async Task OnUpdatedAsync()
         {
+            await OnStockUpdateAsync?.Invoke();
+
             await _bus.PublishAsync(new OnStockUpdated
             {
                 Red = Red,

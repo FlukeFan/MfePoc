@@ -1,12 +1,26 @@
-﻿@inject StockDb StockDb
+﻿@implements IDisposable
+@inject StockDb StockDb
 
 <div>Red Level = <span style="background:#faa; padding: 2px;">@StockDb.Red</span></div>
 <div>Green Level = <span style="background:#afa; padding: 2px;">@StockDb.Green</span></div>
 <div>Blue Level = <span style="background:#aaf; padding: 2px;">@StockDb.Blue</span></div>
 
 @code {
-    public void Refresh()
+
+    override protected void OnInitialized()
     {
-        StateHasChanged();
+        base.OnInitialized();
+        StockDb.OnStockUpdateAsync += Refresh;
     }
+
+    private async Task Refresh()
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    void IDisposable.Dispose()
+    {
+        StockDb.OnStockUpdateAsync -= Refresh;
+    }
+
 }

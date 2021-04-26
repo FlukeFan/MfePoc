@@ -13,12 +13,8 @@
     [Parameter]
     public Func<StockDb, Task> StockActionAsync { get; set; }
 
-    [Parameter]
-    public Func<StockLevels> StockLevels { get; set; }
-
     private async Task DoStockAction()
     {
         await StockActionAsync(StockDb);
-        StockLevels?.Invoke()?.Refresh();
     }
 }

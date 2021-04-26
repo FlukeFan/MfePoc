@@ -9,13 +9,11 @@
 <br />
 <br />
 
-<StockLevels @ref="_stockLevels" />
+<StockLevels />
 
 <HostDetail />
 
 @code {
-
-    private StockLevels _stockLevels;
 
     [Parameter]
     public Type Generate { get; set; }
@@ -25,8 +23,6 @@
         return builder =>
         {
             builder.OpenComponent(0, Generate);
-            Func<StockLevels> stockLevels = () => _stockLevels;
-            builder.AddAttribute(1, nameof(IGenerationButton.StockLevels), stockLevels);
             builder.CloseComponent();
         };
     }

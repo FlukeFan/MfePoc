@@ -21,13 +21,12 @@ namespace MfePoc.Shared.Bus
 
         private static void RegisterHandler(IServiceCollection services, Type handlerType)
         {
-            var handlerInterface = handlerType.GetInterfaces()
-                .SingleOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IHandle<>));
+            var handlerInterfaces = handlerType.GetInterfaces()
+                .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IHandle<>))
+                .ToList();
 
-            if (handlerInterface == null)
-                return;
-
-            services.AddTransient(handlerInterface, handlerType);
+            handlerInterfaces.ForEach(i =>
+                services.AddTransient(i, handlerType));
         }
     }
 }

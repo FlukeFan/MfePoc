@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Generation\Contract\MfePoc.Generation.Contract.csproj" />
     <ProjectReference Include="..\Client\MfePoc.Mixing.Client.csproj" />
     <ProjectReference Include="..\..\..\Shared\MfePoc.Shared.csproj" />
   </ItemGroup>

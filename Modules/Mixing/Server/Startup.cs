@@ -1,4 +1,7 @@
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using MfePoc.Shared.Bus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
@@ -22,7 +25,10 @@ namespace MfePoc.Mixing.Server
         {
             services.AddZipDeploy();
 
+            services.AddDumbFileBus("Mixing", GetType().Assembly);
+            services.AddHostedService<HostStartup>();
             services.AddSignalR();
+
             var mvcBuilder = services.AddRazorPages();
 
             if (HostEnvironment.IsDevelopment())
@@ -52,6 +58,23 @@ namespace MfePoc.Mixing.Server
                 endpoints.MapHub<MixingHub>("/hub");
                 endpoints.MapFallbackToPage("/_Host");
             });
+        }
+
+        private class HostStartup : IHostedService
+        {
+            private IBus _bus;
+
+            public HostStartup(IBus bus)
+            {
+                _bus = bus;
+            }
+
+            public async Task StartAsync(CancellationToken cancellationToken)
+            {
+                await _bus.PublishAsync(new Generation.Contract.OnServiceStarted { Name = "Mixing" });
+            }
+
+            public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
         }
     }
 }

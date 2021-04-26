@@ -44,5 +44,20 @@ namespace MfePoc.Generation
                 Blue = Blue,
             });
         }
+
+        private class ServiceStarted : IHandle<OnServiceStarted>
+        {
+            private readonly StockDb _stockDb;
+
+            public ServiceStarted(StockDb stockDb)
+            {
+                _stockDb = stockDb;
+            }
+
+            public async Task HandleAsync(OnServiceStarted message)
+            {
+                await _stockDb.OnUpdatedAsync();
+            }
+        }
     }
 }

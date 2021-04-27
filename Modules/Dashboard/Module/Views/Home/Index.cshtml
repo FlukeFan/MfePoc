@@ -29,6 +29,12 @@
 
 </div>
 
+Messages:
+<div>
+    <textarea id="messages" rows="6" cols="80" style="font-size: smaller">
+    </textarea>
+</div>
+
 <p>
     This page was rendered from process Id=@System.Diagnostics.Process.GetCurrentProcess().Id Framework=@System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
 </p>
@@ -48,10 +54,40 @@
             hub.start().then(function () {
                 notify("Dashboard started");
             });
+
+            window.setInterval(clearMessage, 1500);
         });
 
         function notify(message) {
-            $.notify(message, { delay: 350, timer: 10, allow_dismiss: false, placement: { from: "bottom", align: "right" } });
+            var text = $('#messages').text();
+            var message = formatDate(message) + '\n' + text;
+            $('#messages').text(message);
+        }
+
+        function clearMessage() {
+            var text = $('#messages').text();
+            var lastLine = text.lastIndexOf('\n');
+
+            if (lastLine > 0) {
+                text = text.slice(0, lastLine);
+            } else {
+                text = '';
+            }
+
+            $('#messages').text(text);
+        }
+
+        function formatDate(message) {
+            var date = new Date();
+            var hours = leadingZero(date.getHours());
+            var minutes = leadingZero(date.getMinutes());
+            var seconds = leadingZero(date.getSeconds());
+            var time = hours + ':' + minutes + ':' + seconds + '.' + date.getMilliseconds();
+            return time + ' - ' + message;
+        }
+
+        function leadingZero(value) {
+            return value < 10 ? '0' + value : value;
         }
 
     </script>

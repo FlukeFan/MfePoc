@@ -35,14 +35,6 @@
     {
         <link href="@layoutModel.ClientStyles" rel="stylesheet" />
     }
-
-    <style>
-        @@media screen and (max-width: 576px) {
-            [data-notify="container"] {
-                max-width: 70%;
-            }
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -107,7 +99,6 @@
     <script src="~/_content/MfePoc.Shared/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/_content/MfePoc.Shared/js/site.js" asp-append-version="true"></script>
 
-    <script src="/Dashboard/lib/bootstrap-notify/dist/bootstrap-notify.min.js"></script>
     <script src="/Dashboard/lib/signalr/signalr.min.js"></script>
 
     @if (layoutModel.EnableBlazorServerSide)

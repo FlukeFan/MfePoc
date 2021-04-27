@@ -9,19 +9,9 @@ namespace MfePoc.Generation.Contract
             return FramedControl("StockLevels", 156, 52);
         }
 
-        public static HtmlString RedGenerator()
+        public static HtmlString ColourGenerators()
         {
-            return FramedControl("RedButton", 150, 40);
-        }
-
-        public static HtmlString GreenGenerator()
-        {
-            return FramedControl("GreenButton", 150, 40);
-        }
-
-        public static HtmlString BlueGenerator()
-        {
-            return FramedControl("BlueButton", 150, 40);
+            return FramedControl("ColourGenerators", 150, 120);
         }
 
         private static HtmlString FramedControl(string name, int width, int height)

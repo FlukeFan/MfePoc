@@ -82,12 +82,22 @@ Messages:
             var hours = leadingZero(date.getHours());
             var minutes = leadingZero(date.getMinutes());
             var seconds = leadingZero(date.getSeconds());
-            var time = hours + ':' + minutes + ':' + seconds + '.' + date.getMilliseconds();
+            var time = hours + ':' + minutes + ':' + seconds + '.' + trailingZeros(date.getMilliseconds());
             return time + ' - ' + message;
         }
 
         function leadingZero(value) {
             return value < 10 ? '0' + value : value;
+        }
+
+        function trailingZeros(value) {
+            value = '' + value;
+
+            while (value.length < 3) {
+                value = value + '0';
+            }
+
+            return value;
         }
 
     </script>

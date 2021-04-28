@@ -97,24 +97,13 @@
 
     <script src="~/_content/MfePoc.Shared/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/_content/MfePoc.Shared/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/_content/MfePoc.Shared/js/site.js" asp-append-version="true"></script>
 
     <script src="/Dashboard/lib/signalr/signalr.min.js"></script>
 
     @if (layoutModel.EnableBlazorServerSide)
     {
         <script src="@(layoutModel.BaseUrl)_framework/blazor.server.js"></script>
-        <script>
-            var reload = function () {
-                $.ajax({
-                    url: document.location.href,
-                    error: function () { window.setTimeout(reload, 300); },
-                    success: function () { document.location.reload(); }
-                });
-            }
-
-            Blazor.defaultReconnectionHandler._reconnectCallback = reload;
-        </script>
+        <script src="~/_content/MfePoc.Shared/js/blazorServerReload.js" asp-append-version="true"></script>
     }
 
     @if (layoutModel.EnableBlazorClientSide)

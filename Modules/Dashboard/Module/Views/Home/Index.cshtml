@@ -29,10 +29,11 @@
 
 </div>
 
-Messages:
-<div>
-    <textarea id="messages" rows="6" cols="80" style="font-size: smaller">
-    </textarea>
+Bus messages:
+<div class="container row">
+    <div class="col-12">
+        <textarea id="messages" rows="6" cols="80" style="font-size: smaller; height: 120px; width:100%"></textarea>
+    </div>
 </div>
 
 <p>
@@ -54,26 +55,21 @@ Messages:
             hub.start().then(function () {
                 notify("Dashboard started");
             });
-
-            window.setInterval(clearMessage, 1500);
         });
 
         function notify(message) {
             var text = $('#messages').text();
-            var message = formatDate(message) + '\n' + text;
-            $('#messages').text(message);
+            var message = formatDate(message);
+            text = text.split('\n')[0] ? message + '\n' + text : message;
+            $('#messages').text(text);
+            window.setTimeout(clearMessage, 5000);
         }
 
         function clearMessage() {
             var text = $('#messages').text();
-            var lastLine = text.lastIndexOf('\n');
-
-            if (lastLine > 0) {
-                text = text.slice(0, lastLine);
-            } else {
-                text = '';
-            }
-
+            var lines = text.split('\n');
+            lines.pop();
+            text = lines.join('\n');
             $('#messages').text(text);
         }
 

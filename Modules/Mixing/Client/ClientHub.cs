@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -23,6 +24,7 @@ namespace MfePoc.Mixing.Client
 
                 var hub = new HubConnectionBuilder()
                     .WithUrl(navigationManager.ToAbsoluteUri("hub"))
+                    .WithAutomaticReconnect(new KeepRetrying())
                     .Build();
 
                 await hub.StartAsync();
@@ -45,6 +47,14 @@ namespace MfePoc.Mixing.Client
         public interface IRequests
         {
             string RequestHostDetail();
+        }
+
+        private class KeepRetrying : IRetryPolicy
+        {
+            public System.TimeSpan? NextRetryDelay(RetryContext retryContext)
+            {
+                return TimeSpan.FromMilliseconds(500);
+            }
         }
     }
 }

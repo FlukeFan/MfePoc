@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 
-namespace MfePoc.Mixing.Client
+namespace MfePoc.Mixing.Client.Comms
 {
     public class ClientHub
     {
@@ -44,9 +44,10 @@ namespace MfePoc.Mixing.Client
             return (string)response;
         }
 
-        public interface IRequests
+        public async Task<StockLevelResponse> RequestStockLevelsAsync()
         {
-            string RequestHostDetail();
+            var response = await _hub.InvokeCoreAsync(nameof(IRequests.RequestStockLevels), typeof(StockLevelResponse), new object[0]);
+            return (StockLevelResponse)response;
         }
 
         private class KeepRetrying : IRetryPolicy

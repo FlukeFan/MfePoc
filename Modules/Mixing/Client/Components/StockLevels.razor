@@ -1,0 +1,26 @@
+﻿@inject NavigationManager NavManager
+
+<div class="bg-warning text-white stock-counter">
+    @_stockLevels?.Yellow
+</div>
+
+<div class="bg-info text-white stock-counter">
+    @_stockLevels?.Cyan
+</div>
+
+<div class="bg-magenta text-white stock-counter">
+    @_stockLevels?.Magenta
+</div>
+
+@code {
+
+    private ClientHub _hub;
+    private StockLevelResponse _stockLevels;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _hub = await ClientHub.GetStartedHubAsync(NavManager);
+        _stockLevels = await _hub.RequestStockLevelsAsync();
+    }
+
+}

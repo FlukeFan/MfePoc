@@ -80,3 +80,7 @@ body {
     border-radius: 6px;
     font-size: 24px;
 }
+
+.bg-magenta {
+    background-color: #a207a2;
+}

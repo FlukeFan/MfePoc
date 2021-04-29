@@ -40,7 +40,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a href="/" class="navbar-brand" data-fetch="mvc">Home</a>
+                <a href="/" class="navbar-brand">Home</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -53,7 +53,7 @@
                                 if (menu.Items == null)
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" href="@menu.Path" data-fetch="mvc">@menu.Text</a>
+                                        <a class="nav-link text-dark" href="@menu.Path">@menu.Text</a>
                                     </li>
                                 }
                                 else
@@ -104,7 +104,7 @@
     @if (layoutModel.EnableBlazorServerSide)
     {
         <script src="@(layoutModel.BaseUrl)_framework/blazor.server.js"></script>
-        <script src="~/_content/MfePoc.Shared/js/blazorServerReload.js" asp-append-version="true"></script>
+        <script src="~/_content/MfePoc.Shared/js/blazorServerReload.js"></script>
     }
 
     @if (layoutModel.EnableBlazorClientSide)

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xml>
+  <Menu Position="0" Text="Generation">
+    <MenuItem Text="Index" Path="/Generation/" />
+    <MenuItem Text="Red" Path="/Generation/GenerateRed" />
+    <MenuItem Text="Green" Path="/Generation/GenerateGreen" />
+    <MenuItem Text="Blue" Path="/Generation/GenerateBlue" />
+  </Menu>
+</xml>

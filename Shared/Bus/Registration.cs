@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using MfePoc.Shared.Views.Shared;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MfePoc.Shared.Bus
@@ -14,6 +15,7 @@ namespace MfePoc.Shared.Bus
 
             services.AddSingleton(new Host.BusName { Name = name });
             services.AddHostedService<Host>();
+            services.AddTransient<IHandle<OnServiceStarted>, AppLayoutModel.ServiceStarted>();
 
             foreach (var handlerType in handlerAssembly.GetTypes())
                 RegisterHandler(services, handlerType);

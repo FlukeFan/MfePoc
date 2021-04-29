@@ -14,4 +14,10 @@
     <ProjectReference Include="..\..\Generation\Contract\MfePoc.Generation.Contract.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="module.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

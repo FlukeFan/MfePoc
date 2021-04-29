@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xml>
+  <Menu Position="1" Text="Mixing">
+    <MenuItem Text="Home" Path="/Mixing/" />
+    <MenuItem Text="Counter" Path="/Mixing/counter" />
+    <MenuItem Text="Fetch data" Path="/Mixing/fetchdata" />
+  </Menu>
+</xml>

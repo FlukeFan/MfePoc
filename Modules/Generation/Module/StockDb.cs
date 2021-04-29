@@ -40,7 +40,7 @@ namespace MfePoc.Generation
 
         private async Task OnUpdatedAsync()
         {
-            await OnStockUpdateAsync?.Invoke();
+            await (OnStockUpdateAsync?.Invoke() ?? Task.CompletedTask);
 
             await _bus.PublishAsync(new OnStockUpdated
             {

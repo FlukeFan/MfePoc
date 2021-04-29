@@ -46,32 +46,30 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Generation</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/Generation/">Index</a>
-                                <a class="dropdown-item" href="/Generation/GenerateRed">Red</a>
-                                <a class="dropdown-item" href="/Generation/GenerateGreen">Green</a>
-                                <a class="dropdown-item" href="/Generation/GenerateBlue">Blue</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mixing</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/Mixing/">Home</a>
-                                <a class="dropdown-item" href="/Mixing/counter">Counter</a>
-                                <a class="dropdown-item" href="/Mixing/fetchdata">Fetch data</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Dashboard/" data-fetch="mvc">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/BlazorSS2/" data-fetch="blazor-ss">Blazor SS2</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/BlazorCS2/" data-fetch="blazor-ss">Blazor CS2</a>
-                        </li>
+                        @{
+                            var menus = layoutModel.GetMenus(hostEnv);
+                            foreach (var menu in menus)
+                            {
+                                if (menu.Items == null)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="@menu.Path" data-fetch="mvc">@menu.Text</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@menu.Text</a>
+                                        <div class="dropdown-menu">
+                                            @foreach (var item in menu.Items)
+                                            {
+                                                <a class="dropdown-item" href="@item.Path">@item.Text</a>
+                                            }
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        }
                     </ul>
                 </div>
             </div>

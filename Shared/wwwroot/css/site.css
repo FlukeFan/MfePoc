@@ -84,3 +84,9 @@ body {
 .bg-magenta {
     background-color: #a207a2;
 }
+
+.btn-magenta {
+    color: #fff;
+    background-color: #a207a2;
+    border-color: #a207a2;
+}

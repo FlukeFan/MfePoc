@@ -24,6 +24,7 @@ namespace MfePoc.Mixing.Server
             services.AddZipDeploy();
 
             services.AddDumbFileBus("Mixing", GetType().Assembly);
+            services.AddSingleton<StockDb>();
             services.AddSignalR();
 
             var mvcBuilder = services.AddRazorPages();

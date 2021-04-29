@@ -2,7 +2,6 @@
 <xml>
   <Menu Position="1" Text="Mixing">
     <MenuItem Text="Home" Path="/Mixing/" />
-    <MenuItem Text="Counter" Path="/Mixing/counter" />
-    <MenuItem Text="Fetch data" Path="/Mixing/fetchdata" />
+    <MenuItem Text="Mix" Path="/Mixing/mix" />
   </Menu>
 </xml>

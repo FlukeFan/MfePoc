@@ -50,6 +50,12 @@ namespace MfePoc.Mixing.Client.Comms
             return (StockLevelResponse)response;
         }
 
+        public async Task<string> RequestMixAsync(int red, int green, int blue)
+        {
+            var response = await _hub.InvokeCoreAsync(nameof(IRequests.RequestMixAsync), typeof(string), new object[] { red, green, blue });
+            return (string)response;
+        }
+
         private class KeepRetrying : IRetryPolicy
         {
             public System.TimeSpan? NextRetryDelay(RetryContext retryContext)

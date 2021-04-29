@@ -1,11 +1,41 @@
 ﻿@inject NavigationManager NavManager
 
-<button class="btn btn-warning">Generate Yellow</button>
+<button class="btn btn-warning" @onclick=@GenerateYellow>Generate Yellow</button>
 <div style="padding-top:8px"></div>
-<button class="btn btn-info">Generate Cyan</button>
+<button class="btn btn-info" @onclick=@GenerateCyan>Generate Cyan</button>
 <div style="padding-top:8px"></div>
-<button class="btn btn-magenta">Generate Magenta</button>
+<button class="btn btn-magenta" @onclick=@GenerateMagenta>Generate Magenta</button>
+
+@if (!string.IsNullOrWhiteSpace(_message))
+{
+    <div class="alert alert-danger" role="alert" style="margin-top: 20px;">
+        @_message
+    </div>
+}
 
 @code {
+
+    private ClientHub _hub;
+    private string _message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _hub = await ClientHub.GetStartedHubAsync(NavManager);
+    }
+
+    private async Task GenerateYellow()
+    {
+        _message = await _hub.RequestMixAsync(red: 1, green: 1, blue: 0);
+    }
+
+    private async Task GenerateCyan()
+    {
+        _message = await _hub.RequestMixAsync(red: 0, green: 1, blue: 1);
+    }
+
+    private async Task GenerateMagenta()
+    {
+        _message = await _hub.RequestMixAsync(red: 1, green: 0, blue: 1);
+    }
 
 }

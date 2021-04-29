@@ -57,6 +57,14 @@ Bus messages:
             hub.start().then(function () {
                 notify("Dashboard started");
             });
+
+            hub.onreconnecting(function () {
+                notify('SignalrR connection lost; reconnecting');
+            });
+
+            hub.onreconnected(function () {
+                notify('SignalrR reconnected');
+            });
         });
 
         function notify(message) {
@@ -64,7 +72,7 @@ Bus messages:
             var message = formatDate(message);
             text = text.split('\n')[0] ? message + '\n' + text : message;
             $('#messages').text(text);
-            window.setTimeout(clearMessage, 5000);
+            window.setTimeout(clearMessage, 7000);
         }
 
         function clearMessage() {

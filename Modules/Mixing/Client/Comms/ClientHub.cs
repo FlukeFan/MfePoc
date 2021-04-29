@@ -8,6 +8,8 @@ namespace MfePoc.Mixing.Client.Comms
 {
     public class ClientHub
     {
+        public event Action<StockLevelResponse> OnStockUpdate;
+
         private static SemaphoreSlim _lock = new SemaphoreSlim(1);
         private static ClientHub _instance;
 
@@ -30,6 +32,7 @@ namespace MfePoc.Mixing.Client.Comms
                 await hub.StartAsync();
 
                 _instance = new ClientHub { _hub = hub };
+                hub.On<int, int, int>(nameof(OnStockUpdated), _instance.OnStockUpdated);
                 return _instance;
             }
             finally
@@ -56,9 +59,19 @@ namespace MfePoc.Mixing.Client.Comms
             return (string)response;
         }
 
+        public void OnStockUpdated(int yellow, int cyan, int magenta)
+        {
+            OnStockUpdate?.Invoke(new StockLevelResponse
+            {
+                Yellow = yellow,
+                Cyan = cyan,
+                Magenta = magenta,
+            });
+        }
+
         private class KeepRetrying : IRetryPolicy
         {
-            public System.TimeSpan? NextRetryDelay(RetryContext retryContext)
+            public TimeSpan? NextRetryDelay(RetryContext retryContext)
             {
                 return TimeSpan.FromMilliseconds(500);
             }

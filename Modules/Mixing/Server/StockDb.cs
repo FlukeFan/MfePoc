@@ -1,13 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MfePoc.Shared.Bus;
 
 namespace MfePoc.Mixing.Server
 {
     public class StockDb
     {
-        public event Func<Task> OnStockUpdateAsync;
-
         public int Red { get; private set; }
         public int Green { get; private set; }
         public int Blue { get; private set; }
@@ -16,10 +13,8 @@ namespace MfePoc.Mixing.Server
         public int Cyan { get; private set; }
         public int Magenta { get; private set; }
 
-        public async Task<string> MixAsync(int red, int green, int blue)
+        public string Mix(int red, int green, int blue)
         {
-            await Task.CompletedTask;
-
             if (red > Red)
                 return "You need more Red";
 
@@ -59,11 +54,6 @@ namespace MfePoc.Mixing.Server
             return "Unidentified colour being mixed";
         }
 
-        private async Task OnUpdatedAsync()
-        {
-            await (OnStockUpdateAsync?.Invoke() ?? Task.CompletedTask);
-        }
-
         private class PrimaryStockUpdated : IHandle<Generation.Contract.OnStockUpdated>
         {
             private readonly StockDb _stockDb;
@@ -73,12 +63,12 @@ namespace MfePoc.Mixing.Server
                 _stockDb = stockDb;
             }
 
-            public async Task HandleAsync(Generation.Contract.OnStockUpdated message)
+            public Task HandleAsync(Generation.Contract.OnStockUpdated message)
             {
                 _stockDb.Red = message.Red;
                 _stockDb.Green = message.Green;
                 _stockDb.Blue = message.Blue;
-                await _stockDb.OnUpdatedAsync();
+                return Task.CompletedTask;
             }
         }
     }

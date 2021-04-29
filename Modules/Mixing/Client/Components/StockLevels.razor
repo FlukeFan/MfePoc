@@ -1,4 +1,5 @@
-﻿@inject NavigationManager NavManager
+﻿@implements IDisposable
+@inject NavigationManager NavManager
 
 <div class="bg-warning text-white stock-counter">
     @_stockLevels?.Yellow
@@ -21,6 +22,17 @@
     {
         _hub = await ClientHub.GetStartedHubAsync(NavManager);
         _stockLevels = await _hub.RequestStockLevelsAsync();
+        _hub.OnStockUpdate += OnStockUpdate;
     }
 
+    private void OnStockUpdate(StockLevelResponse response)
+    {
+        _stockLevels = response;
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        _hub.OnStockUpdate -= OnStockUpdate;
+    }
 }

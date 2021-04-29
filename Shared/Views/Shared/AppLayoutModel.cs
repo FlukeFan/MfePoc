@@ -9,6 +9,7 @@ namespace MfePoc.Shared.Views.Shared
         public bool EnableBlazorServerSide;
         public bool EnableBlazorClientSide;
         public string ClientStyles;
+        public string CustomScript;
     }
 
     public static class AppLayoutExtensions
@@ -24,7 +25,8 @@ namespace MfePoc.Shared.Views.Shared
             string baseUrl,
             bool enableBlazorServerSide = false,
             bool enableBlazorClientSide = false,
-            string clientStyles = null)
+            string clientStyles = null,
+            string customScript = null)
         {
             page.Layout = "_appLayout";
 
@@ -35,6 +37,7 @@ namespace MfePoc.Shared.Views.Shared
                 EnableBlazorServerSide = enableBlazorServerSide,
                 EnableBlazorClientSide = enableBlazorClientSide,
                 ClientStyles = clientStyles,
+                CustomScript = customScript,
             };
 
             page.ViewContext.ViewData["appLayoutModel"] = model;

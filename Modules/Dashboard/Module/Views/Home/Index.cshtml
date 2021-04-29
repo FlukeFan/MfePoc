@@ -47,6 +47,7 @@ Bus messages:
         $(function () {
             var hub = new signalR.HubConnectionBuilder()
                 .withUrl("/Dashboard/hub")
+                .withAutomaticReconnect({ nextRetryDelayInMilliseconds: function () { return 500; } })
                 .build();
 
             hub.on("notify", function (message) {

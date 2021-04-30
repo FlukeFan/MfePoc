@@ -141,7 +141,7 @@ namespace MfePoc.Shared.Bus
             _timer.Change(_nextTimeout, Timeout.Infinite);
 
             if (_nextTimeout < 1000)
-                _nextTimeout = 200;
+                _nextTimeout += 200;
 
             if (_nextTimeout < 60000)
                 _nextTimeout = _nextTimeout * 2;

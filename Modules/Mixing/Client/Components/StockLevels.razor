@@ -2,15 +2,15 @@
 @inject NavigationManager NavManager
 
 <div class="bg-warning text-white stock-counter">
-    @_stockLevels?.Yellow
+    @(_stockLevels?.Yellow ?? 0)
 </div>
 
 <div class="bg-info text-white stock-counter">
-    @_stockLevels?.Cyan
+    @(_stockLevels?.Cyan ?? 0)
 </div>
 
 <div class="bg-magenta text-white stock-counter">
-    @_stockLevels?.Magenta
+    @(_stockLevels?.Magenta ?? 0)
 </div>
 
 @code {

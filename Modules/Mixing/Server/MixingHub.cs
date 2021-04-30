@@ -22,18 +22,13 @@ namespace MfePoc.Mixing.Server
 
         public StockLevelResponse RequestStockLevels()
         {
-            return new StockLevelResponse
-            {
-                Yellow = _stockDb.Yellow,
-                Cyan = _stockDb.Cyan,
-                Magenta = _stockDb.Magenta,
-            };
+            return _stockDb.Levels();
         }
 
         public async Task<string> RequestMixAsync(int red, int green, int blue)
         {
             var message = _stockDb.Mix(red, green, blue);
-            await Clients.All.SendAsync(nameof(ClientHub.OnStockUpdated), _stockDb.Yellow, _stockDb.Cyan, _stockDb.Magenta);
+            await Clients.All.SendAsync(nameof(ClientHub.OnStockUpdated), _stockDb.Levels());
             return message;
         }
     }

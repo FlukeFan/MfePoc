@@ -2,8 +2,8 @@
 {
     public class StockLevelResponse
     {
-        public int Yellow;
-        public int Cyan;
-        public int Magenta;
+        public int Yellow { get; set; }
+        public int Cyan { get; set; }
+        public int Magenta { get; set; }
     }
 }

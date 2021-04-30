@@ -32,7 +32,7 @@ namespace MfePoc.Mixing.Client.Comms
                 await hub.StartAsync();
 
                 _instance = new ClientHub { _hub = hub };
-                hub.On<int, int, int>(nameof(OnStockUpdated), _instance.OnStockUpdated);
+                hub.On<StockLevelResponse>(nameof(OnStockUpdated), _instance.OnStockUpdated);
                 return _instance;
             }
             finally
@@ -59,14 +59,9 @@ namespace MfePoc.Mixing.Client.Comms
             return (string)response;
         }
 
-        public void OnStockUpdated(int yellow, int cyan, int magenta)
+        public void OnStockUpdated(StockLevelResponse levels)
         {
-            OnStockUpdate?.Invoke(new StockLevelResponse
-            {
-                Yellow = yellow,
-                Cyan = cyan,
-                Magenta = magenta,
-            });
+            OnStockUpdate?.Invoke(levels);
         }
 
         private class KeepRetrying : IRetryPolicy

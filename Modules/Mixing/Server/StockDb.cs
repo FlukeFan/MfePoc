@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using MfePoc.Mixing.Client.Comms;
 using MfePoc.Shared.Bus;
 
 namespace MfePoc.Mixing.Server
@@ -52,6 +53,16 @@ namespace MfePoc.Mixing.Server
             }
 
             return "Unidentified colour being mixed";
+        }
+
+        public StockLevelResponse Levels()
+        {
+            return new StockLevelResponse
+            {
+                Yellow = Yellow,
+                Cyan = Cyan,
+                Magenta = Magenta,
+            };
         }
 
         private class PrimaryStockUpdated : IHandle<Generation.Contract.OnStockUpdated>

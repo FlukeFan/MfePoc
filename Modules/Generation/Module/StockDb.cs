@@ -38,6 +38,14 @@ namespace MfePoc.Generation
             await OnUpdatedAsync();
         }
 
+        public async Task ConsumeAsync(OnStockConsumed consumed)
+        {
+            Red -= consumed.Red;
+            Green -= consumed.Green;
+            Blue -= consumed.Blue;
+            await OnUpdatedAsync();
+        }
+
         private async Task OnUpdatedAsync()
         {
             await (OnStockUpdateAsync?.Invoke() ?? Task.CompletedTask);
@@ -48,6 +56,21 @@ namespace MfePoc.Generation
                 Green = Green,
                 Blue = Blue,
             });
+        }
+
+        private class StockConsumed : IHandle<OnStockConsumed>
+        {
+            private readonly StockDb _stockDb;
+
+            public StockConsumed(StockDb stockDb)
+            {
+                _stockDb = stockDb;
+            }
+
+            public async Task HandleAsync(OnStockConsumed message)
+            {
+                await _stockDb.ConsumeAsync(message);
+            }
         }
 
         private class ServiceStarted : IHandle<OnServiceStarted>

@@ -27,7 +27,7 @@ namespace MfePoc.Mixing.Server
 
         public async Task<string> RequestMixAsync(int red, int green, int blue)
         {
-            var message = _stockDb.Mix(red, green, blue);
+            var message = await _stockDb.MixAsync(red, green, blue);
             await Clients.All.SendAsync(nameof(ClientHub.OnStockUpdated), _stockDb.Levels());
             return message;
         }

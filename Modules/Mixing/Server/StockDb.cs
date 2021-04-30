@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using MfePoc.Generation.Contract;
 using MfePoc.Mixing.Client.Comms;
 using MfePoc.Shared.Bus;
 
@@ -6,6 +7,13 @@ namespace MfePoc.Mixing.Server
 {
     public class StockDb
     {
+        private readonly IBus _bus;
+
+        public StockDb(IBus bus)
+        {
+            _bus = bus;
+        }
+
         public int Red { get; private set; }
         public int Green { get; private set; }
         public int Blue { get; private set; }
@@ -14,7 +22,7 @@ namespace MfePoc.Mixing.Server
         public int Cyan { get; private set; }
         public int Magenta { get; private set; }
 
-        public string Mix(int red, int green, int blue)
+        public async Task<string> MixAsync(int red, int green, int blue)
         {
             if (red > Red)
                 return "You need more Red";
@@ -31,6 +39,7 @@ namespace MfePoc.Mixing.Server
                 Red -= red;
                 Green -= green;
                 Yellow += 1;
+                await RaiseConsumed(red, green, 0);
                 return null;
             }
 
@@ -40,6 +49,7 @@ namespace MfePoc.Mixing.Server
                 Green -= green;
                 Blue -= blue;
                 Cyan += 1;
+                await RaiseConsumed(0, green, blue);
                 return null;
             }
 
@@ -49,10 +59,21 @@ namespace MfePoc.Mixing.Server
                 Red -= red;
                 Blue -= blue;
                 Magenta += 1;
+                await RaiseConsumed(red, 0, blue);
                 return null;
             }
 
             return "Unidentified colour being mixed";
+        }
+
+        private async Task RaiseConsumed(int red, int green, int blue)
+        {
+            await _bus.PublishAsync(new OnStockConsumed
+            {
+                Red = red,
+                Green = green,
+                Blue = blue,
+            });
         }
 
         public StockLevelResponse Levels()

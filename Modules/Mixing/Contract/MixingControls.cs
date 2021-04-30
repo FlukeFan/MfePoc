@@ -6,12 +6,12 @@ namespace MfePoc.Mixing.Contract
     {
         public static HtmlString StockLevels()
         {
-            return FramedControl("StockLevels", 156, 52);
+            return FramedControl("StockLevels", 170, 52);
         }
 
-        public static HtmlString ColourGenerators()
+        public static HtmlString Mixers()
         {
-            return FramedControl("Mixers", 150, 120);
+            return FramedControl("Mixers", 200, 200);
         }
 
         private static HtmlString FramedControl(string name, int width, int height)

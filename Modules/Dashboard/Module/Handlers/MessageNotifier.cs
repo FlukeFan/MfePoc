@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace MfePoc.Dashboard.Handlers
 {
-    public class MessageNotifier : IHandle<OnStockUpdated>, IHandle<OnServiceStarted>
+    public class MessageNotifier :
+        IHandle<OnStockUpdated>,
+        IHandle<OnServiceStarted>,
+        IHandle<OnStockConsumed>
     {
         private readonly IHubContext<DashboardHub> _hub;
 
@@ -22,6 +25,11 @@ namespace MfePoc.Dashboard.Handlers
         public async Task HandleAsync(OnServiceStarted message)
         {
             await _hub.Clients.All.SendAsync("notify", $"{message.Name} Service Started");
+        }
+
+        public async Task HandleAsync(OnStockConsumed message)
+        {
+            await _hub.Clients.All.SendAsync("notify", $"Consumed: Red={message.Red} Green={message.Green} Blue={message.Blue}");
         }
     }
 }

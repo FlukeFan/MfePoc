@@ -2,15 +2,15 @@
 @inject NavigationManager NavManager
 
 <div class="bg-warning text-white stock-counter">
-    @(_stockLevels?.Yellow ?? 0)
+    @(_stockLevels?.Yellow.ToString() ?? "-")
 </div>
 
 <div class="bg-info text-white stock-counter">
-    @(_stockLevels?.Cyan ?? 0)
+    @(_stockLevels?.Cyan.ToString() ?? "-")
 </div>
 
 <div class="bg-magenta text-white stock-counter">
-    @(_stockLevels?.Magenta ?? 0)
+    @(_stockLevels?.Magenta.ToString() ?? "-")
 </div>
 
 @code {

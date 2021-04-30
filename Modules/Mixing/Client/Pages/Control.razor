@@ -1,0 +1,29 @@
+﻿@page "/Control"
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager NavManager
+
+@RenderControl()
+
+@code {
+
+    private Type _controlType;
+
+    protected override void OnInitialized()
+    {
+        var query = QueryHelpers.ParseQuery(NavManager.ToAbsoluteUri(NavManager.Uri).Query);
+        var controlName = query.GetValueOrDefault("control");
+        _controlType = typeof(App).Assembly.GetTypes().Single(t => t.Name == controlName);
+
+        base.OnInitialized();
+    }
+
+    private RenderFragment RenderControl()
+    {
+        return builder =>
+        {
+            builder.OpenComponent(0, _controlType);
+            builder.CloseComponent();
+        };
+    }
+
+} 

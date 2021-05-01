@@ -1,8 +1,11 @@
 ﻿using System;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
+using NLog.Web;
 
 namespace MfePoc.Shared
 {
@@ -12,11 +15,20 @@ namespace MfePoc.Shared
         {
             var config = new LoggingConfiguration();
 
-            var logFolder = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..", "logs"));
+            var rootFolder = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), ".."));
+
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            if (environment == Environments.Development)
+                while (!File.Exists(Path.Combine(rootFolder, "MfePoc.sln")))
+                    rootFolder = Directory.GetParent(rootFolder).FullName;
+
+            var logFolder = Path.Combine(rootFolder, "logs");
 
             var fileTarget = new FileTarget("file")
             {
                 FileName = Path.Combine(logFolder, "log.log"),
+                ConcurrentWrites = true,
             };
 
             config.AddRule(LogLevel.Trace, LogLevel.Fatal, fileTarget);
@@ -39,6 +51,12 @@ namespace MfePoc.Shared
             }
 
             LogManager.Shutdown();
+        }
+
+        public static IWebHostBuilder UseMfePocNLog(this IWebHostBuilder builder)
+        {
+            builder.UseNLog();
+            return builder;
         }
     }
 }

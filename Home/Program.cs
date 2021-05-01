@@ -1,7 +1,6 @@
 using MfePoc.Shared;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using NLog.Web;
 
 namespace MfePoc.Home
 {
@@ -19,7 +18,7 @@ namespace MfePoc.Home
                 {
                     webBuilder
                         .UseStartup<Startup>()
-                        .UseNLog();
+                        .UseMfePocNLog();
                 });
     }
 }

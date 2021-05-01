@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <xml>
+  <Warmup Url="/Mixing" />
   <Menu Position="1" Text="Mixing">
     <MenuItem Text="Home" Path="/Mixing/" />
     <MenuItem Text="Mix" Path="/Mixing/mix" />

@@ -1,4 +1,7 @@
-﻿@{
+﻿@namespace MfePoc.Home.Views.Home
+@using Microsoft.AspNetCore.Hosting
+@inject IWebHostEnvironment WebHostEnvironment 
+@{
     this.SetAppLayout(
         title: "Home Page",
         baseUrl: null);
@@ -23,12 +26,11 @@
 @section Scripts {
     <script>
         $(function () {
-            // 'touch' each of the other projects in an iframe to start the processes up eagerly
-            $.ajax('/Generation');
-            $.ajax('/Mixing');
-            $.ajax('/Dashboard');
-            $.ajax('/BlazorSS2');
-            $.ajax('/BlazorCS2');
+            // 'touch' each of the other projects to start the processes up eagerly
+            @foreach (var warmupUrl in IndexModel.WarmupUrls(WebHostEnvironment))
+            {
+                @:$.ajax('@warmupUrl');
+            }
         });
     </script>
 }

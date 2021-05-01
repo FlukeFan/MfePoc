@@ -11,11 +11,21 @@
     }
 
     $(window).on('notify', function (e, d) {
-        internalNotify('posted: ' + d.message);
+        internalNotify(d.message);
     });
 
     function internalNotify(message) {
-        console.log(message);
+        $.notify(message, {
+            delay: 3500,
+            timer: 100,
+            type: 'danger',
+            allow_dismiss: true,
+            mouse_over: 'pause',
+            placement: {
+                from: "bottom",
+                align: "right"
+            }
+        });
     }
 
 }());

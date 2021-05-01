@@ -7,17 +7,9 @@
 <div style="padding-top:8px"></div>
 <button class="btn btn-magenta" @onclick=@GenerateMagenta>Generate Magenta</button>
 
-@if (!string.IsNullOrWhiteSpace(_message))
-{
-    <div class="alert alert-danger" role="alert" style="margin-top: 20px;">
-        @_message
-    </div>
-}
-
 @code {
 
     private ClientHub _hub;
-    private string _message;
 
     protected override async Task OnInitializedAsync()
     {
@@ -26,27 +18,35 @@
 
     private async Task GenerateYellow()
     {
-        _message = await _hub.RequestMixAsync(red: 1, green: 1, blue: 0);
-        await NotifyAsync();
+        var message = await MixAsync(red: 1, green: 1, blue: 0);
+        await NotifyAsync(message);
     }
 
     private async Task GenerateCyan()
     {
-        _message = await _hub.RequestMixAsync(red: 0, green: 1, blue: 1);
-        await NotifyAsync();
+        var message = await MixAsync(red: 0, green: 1, blue: 1);
+        await NotifyAsync(message);
     }
 
     private async Task GenerateMagenta()
     {
-        _message = await _hub.RequestMixAsync(red: 1, green: 0, blue: 1);
-        await NotifyAsync();
+        var message = await MixAsync(red: 1, green: 0, blue: 1);
+        await NotifyAsync(message);
     }
 
-    private async Task NotifyAsync()
+    private async Task<string> MixAsync(int red, int green, int blue)
     {
-        if (!string.IsNullOrWhiteSpace(_message))
+        while (_hub == null)
+            await Task.Delay(100);
+
+        return await _hub.RequestMixAsync(red, green, blue);
+    }
+
+    private async Task NotifyAsync(string message)
+    {
+        if (!string.IsNullOrWhiteSpace(message))
         {
-            await Js.InvokeVoidAsync("mfeNotify", _message);
+            await Js.InvokeVoidAsync("mfeNotify", message);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace MfePoc.Mixing.Contract
 
         public static HtmlString Mixers()
         {
-            return FramedControl("Mixers", 200, 200);
+            return FramedControl("Mixers", 200, 120);
         }
 
         private static HtmlString FramedControl(string name, int width, int height)

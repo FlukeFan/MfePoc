@@ -33,6 +33,7 @@ namespace MfePoc.Shared
             {
                 FileName = Path.Combine(logFolder, "log-${shortdate}.log"),
                 ConcurrentWrites = true,
+                ForceMutexConcurrentWrites = false,
                 ArchiveEvery = FileArchivePeriod.Day,
                 MaxArchiveFiles = 7,
             };

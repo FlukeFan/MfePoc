@@ -1,4 +1,5 @@
 ﻿@inject NavigationManager NavManager
+@inject IJSRuntime Js
 
 <button class="btn btn-warning" @onclick=@GenerateYellow>Generate Yellow</button>
 <div style="padding-top:8px"></div>
@@ -26,16 +27,26 @@
     private async Task GenerateYellow()
     {
         _message = await _hub.RequestMixAsync(red: 1, green: 1, blue: 0);
+        await NotifyAsync();
     }
 
     private async Task GenerateCyan()
     {
         _message = await _hub.RequestMixAsync(red: 0, green: 1, blue: 1);
+        await NotifyAsync();
     }
 
     private async Task GenerateMagenta()
     {
         _message = await _hub.RequestMixAsync(red: 1, green: 0, blue: 1);
+        await NotifyAsync();
     }
 
+    private async Task NotifyAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(_message))
+        {
+            await Js.InvokeVoidAsync("mfeNotify", _message);
+        }
+    }
 }

@@ -14,6 +14,9 @@ namespace MfePoc.Shared
     {
         public static void SetupNLog<T>(Action run)
         {
+            var loggerFullName = typeof(T).FullName;
+            var moduleName = loggerFullName.Replace("MfePoc.", "").Replace(".Program", "");
+
             var config = new LoggingConfiguration();
 
             var rootFolder = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), ".."));
@@ -26,22 +29,25 @@ namespace MfePoc.Shared
 
             var logFolder = Path.Combine(rootFolder, "logs");
 
-            InternalLogger.LogFile = Path.Combine(logFolder, $"{typeof(T).FullName}.internal.log");
+            InternalLogger.LogFile = Path.Combine(logFolder, $"{moduleName}.internal.log");
             LogManager.ThrowConfigExceptions = true;
 
             var fileTarget = new FileTarget("file")
             {
                 FileName = Path.Combine(logFolder, "log-${shortdate}.log"),
                 ConcurrentWrites = true,
+                ConcurrentWriteAttempts = 10,
+                ConcurrentWriteAttemptDelay = 43,
                 ForceMutexConcurrentWrites = false,
                 ArchiveEvery = FileArchivePeriod.Day,
                 MaxArchiveFiles = 7,
+                Layout = "${longdate}|${level:uppercase=true}|" + moduleName + "|${logger}|${message}",
             };
 
             config.AddRule(LogLevel.Trace, LogLevel.Fatal, fileTarget);
             LogManager.Configuration = config;
 
-            var logger = LogManager.GetLogger(typeof(T).FullName);
+            var logger = LogManager.GetLogger(loggerFullName);
             logger.Info("Process start");
 
             try

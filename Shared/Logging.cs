@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using NLog;
+using NLog.Common;
 using NLog.Config;
 using NLog.Targets;
 using NLog.Web;
@@ -25,10 +26,15 @@ namespace MfePoc.Shared
 
             var logFolder = Path.Combine(rootFolder, "logs");
 
+            InternalLogger.LogFile = Path.Combine(logFolder, $"{typeof(T).FullName}.internal.log");
+            LogManager.ThrowConfigExceptions = true;
+
             var fileTarget = new FileTarget("file")
             {
-                FileName = Path.Combine(logFolder, "log.log"),
+                FileName = Path.Combine(logFolder, "log-${shortdate}.log"),
                 ConcurrentWrites = true,
+                ArchiveEvery = FileArchivePeriod.Day,
+                MaxArchiveFiles = 7,
             };
 
             config.AddRule(LogLevel.Trace, LogLevel.Fatal, fileTarget);

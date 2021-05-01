@@ -41,7 +41,7 @@ namespace MfePoc.Shared
                 ForceMutexConcurrentWrites = false,
                 ArchiveEvery = FileArchivePeriod.Day,
                 MaxArchiveFiles = 7,
-                Layout = "${longdate}|${level:uppercase=true}|" + moduleName + "|${logger}|${message}",
+                Layout = "${longdate}|${level:uppercase=true}|" + moduleName + "|${logger}|${message} ${exception:format=tostring}",
             };
 
             config.AddRule(LogLevel.Trace, LogLevel.Fatal, fileTarget);

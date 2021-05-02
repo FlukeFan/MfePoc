@@ -6,6 +6,7 @@ using NLog;
 using NLog.Common;
 using NLog.Config;
 using NLog.Targets;
+using NLog.Targets.Wrappers;
 using NLog.Web;
 
 namespace MfePoc.Shared
@@ -44,7 +45,12 @@ namespace MfePoc.Shared
                 Layout = "${longdate}|${level:uppercase=true}|" + moduleName + "|${logger}|${message} ${exception:format=tostring}",
             };
 
-            config.AddRule(LogLevel.Trace, LogLevel.Fatal, fileTarget);
+            var wrapper = new AsyncTargetWrapper(fileTarget)
+            {
+                OverflowAction = AsyncTargetWrapperOverflowAction.Grow,
+            };
+
+            config.AddRule(LogLevel.Trace, LogLevel.Fatal, wrapper);
             LogManager.Configuration = config;
 
             var logger = LogManager.GetLogger(loggerFullName);

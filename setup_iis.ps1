@@ -40,6 +40,7 @@ function SetupSite($siteName, $path) {
     Set-ItemProperty "IIS:\Sites\$siteName" -Name "PhysicalPath" -Value $path
     Set-ItemProperty "IIS:\Sites\$siteName" -Name "applicationPool" -Value $siteName
     Set-ItemProperty "IIS:\AppPools\$siteName" -Name recycling.disallowOverlappingRotation -Value True
+    Set-ItemProperty "IIS:\AppPools\$siteName" -Name "processModel.identityType" -Value 0
 }
 
 function SetupApp($siteName, $appName, $path) {
@@ -61,6 +62,7 @@ function SetupApp($siteName, $appName, $path) {
 
     Set-ItemProperty "IIS:\Sites\$siteName\$appName" -Name "applicationPool" -Value $poolName
     Set-ItemProperty "IIS:\AppPools\$poolName" -Name "recycling.disallowOverlappingRotation" -Value True
+    Set-ItemProperty "IIS:\AppPools\$poolName" -Name "processModel.identityType" -Value 0
 }
 
 Unzip "home"

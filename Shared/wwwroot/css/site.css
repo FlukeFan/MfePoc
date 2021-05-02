@@ -90,3 +90,9 @@ body {
     background-color: #a207a2;
     border-color: #a207a2;
 }
+
+@media screen and (max-width: 576px) {
+    [data-notify="container"] {
+        max-width: 70%;
+    }
+}

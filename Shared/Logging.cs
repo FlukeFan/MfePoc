@@ -45,9 +45,11 @@ namespace MfePoc.Shared
                 Layout = "${longdate}|${level:uppercase=true}|" + moduleName + "|${logger}|${message} ${exception:format=tostring}",
             };
 
-            var wrapper = new AsyncTargetWrapper(fileTarget)
+            var wrapper = new BufferingTargetWrapper(fileTarget)
             {
-                OverflowAction = AsyncTargetWrapperOverflowAction.Grow,
+                BufferSize = 1000,
+                FlushTimeout = 100,
+                OverflowAction = BufferingTargetWrapperOverflowAction.Flush,
             };
 
             config.AddRule(LogLevel.Trace, LogLevel.Fatal, wrapper);

@@ -123,7 +123,7 @@ namespace MfePoc.Shared.Bus
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, $"Error handling '{message}'");
+                    _logger.LogWarning($"Error handling '{message}' (message has been discarded) - {ex.Message}");
                 }
                 finally
                 {

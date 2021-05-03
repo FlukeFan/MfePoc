@@ -68,14 +68,14 @@ function SetupApp($siteName, $appName, $path) {
 Unzip "home"
 Unzip "generation"
 Unzip "mixing"
-Unzip "dashboard"
-Unzip "blazorss2"
+Unzip "sales"
 Unzip "blazorcs2"
+Unzip "dashboard"
 
 Reset-IISServerManager -Confirm:$False
 SetupSite $siteName "$((Get-Location).Path)\home"
 SetupApp $siteName "Generation" "$((Get-Location).Path)\generation"
 SetupApp $siteName "Mixing" "$((Get-Location).Path)\mixing"
-SetupApp $siteName "Dashboard" "$((Get-Location).Path)\dashboard"
-SetupApp $siteName "BlazorSS2" "$((Get-Location).Path)\blazorss2"
+SetupApp $siteName "Sales" "$((Get-Location).Path)\sales"
 SetupApp $siteName "BlazorCS2" "$((Get-Location).Path)\blazorcs2"
+SetupApp $siteName "Dashboard" "$((Get-Location).Path)\dashboard"

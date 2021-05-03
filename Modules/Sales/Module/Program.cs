@@ -2,7 +2,7 @@ using MfePoc.Shared;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace MfePoc.BlazorSS2
+namespace MfePoc.Sales
 {
     public class Program
     {

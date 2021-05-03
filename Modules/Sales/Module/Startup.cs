@@ -7,7 +7,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using ZipDeploy;
 
-namespace MfePoc.BlazorSS2
+namespace MfePoc.Sales
 {
     public class Startup
     {
@@ -30,7 +30,7 @@ namespace MfePoc.BlazorSS2
 
                 services.Configure<MvcRazorRuntimeCompilationOptions>(opt =>
                 {
-                    var libPath = Path.Combine(HostEnvironment.ContentRootPath, "..", "Shared");
+                    var libPath = Path.Combine(HostEnvironment.ContentRootPath, "..", "..", "..", "Shared");
                     var libFullPath = Path.GetFullPath(libPath);
                     opt.FileProviders.Add(new PhysicalFileProvider(libFullPath));
                 });
@@ -45,7 +45,6 @@ namespace MfePoc.BlazorSS2
                 app.UseDeveloperExceptionPage();
 
             app.UseStaticFiles();
-            app.UsePathBase("/BlazorSS2");
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

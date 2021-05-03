@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using MfePoc.Generation.Contract;
 using MfePoc.Mixing.Client.Comms;
 using MfePoc.Shared.Bus;
 
@@ -68,11 +67,18 @@ namespace MfePoc.Mixing.Server
 
         private async Task RaiseConsumed(int red, int green, int blue)
         {
-            await _bus.PublishAsync(new OnStockConsumed
+            await _bus.PublishAsync(new Generation.Contract.OnStockConsumed
             {
                 Red = red,
                 Green = green,
                 Blue = blue,
+            });
+
+            await _bus.PublishAsync(new Mixing.Contract.OnStockUpdated
+            {
+                Yellow = Yellow,
+                Cyan = Cyan,
+                Magenta = Magenta,
             });
         }
 

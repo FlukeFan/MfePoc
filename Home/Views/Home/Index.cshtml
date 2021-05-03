@@ -5,6 +5,8 @@
     this.SetAppLayout(
         title: "Home Page",
         baseUrl: null);
+
+    var warmupUrls = IndexModel.WarmupUrls(WebHostEnvironment);
 }
 
 <h1 class="display-4">Welcome</h1>
@@ -30,6 +32,15 @@
     </a>
 </p>
 <p>
+    Modules:
+    <ul>
+        @foreach (var warmupUrl in warmupUrls)
+        {
+            <li>@warmupUrl.Name: <span id="warmup-status-@warmupUrl.Name">checking <span class="spinner-border spinner-border-sm">&nbsp;</span></span></li>
+        }
+    </ul>
+</p>
+<p>
     This was rendered from process Id=@System.Diagnostics.Process.GetCurrentProcess().Id Framework=@System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
 </p>
 
@@ -37,9 +48,15 @@
     <script>
         $(function () {
             // 'touch' each of the other projects to start the processes up eagerly
-            @foreach (var warmupUrl in IndexModel.WarmupUrls(WebHostEnvironment))
+            @foreach (var warmupUrl in warmupUrls)
             {
-                @:$.ajax('@warmupUrl');
+                <text>
+                    $.ajax({
+                        url: '@warmupUrl.Url',
+                        success: function () { $('#warmup-status-@warmupUrl.Name').html('running'); },
+                        error: function () { $('#warmup-status-@warmupUrl.Name').html('failed'); }
+                    });
+                </text>
             }
         });
     </script>

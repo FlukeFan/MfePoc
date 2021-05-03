@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <xml>
-  <Warmup Url="/Generation" />
+  <Warmup Name="Generation" Url="/Generation" />
   <Menu Position="0" Text="Generation">
     <MenuItem Text="Index" Path="/Generation/" />
     <MenuItem Text="Red" Path="/Generation/GenerateRed" />

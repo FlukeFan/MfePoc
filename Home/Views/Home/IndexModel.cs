@@ -8,9 +8,9 @@ namespace MfePoc.Home.Views.Home
 {
     public static class IndexModel
     {
-        public static IEnumerable<string> WarmupUrls(IWebHostEnvironment host)
+        public static IEnumerable<WarmupUrl> WarmupUrls(IWebHostEnvironment host)
         {
-            var warmupUrls = new List<string>();
+            var warmupUrls = new List<WarmupUrl>();
             var rootPath = Path.Combine(host.ContentRootPath, "..");
 
             if (host.IsDevelopment())
@@ -28,10 +28,20 @@ namespace MfePoc.Home.Views.Home
                 doc.Load(moduleFile);
 
                 var warmupElement = (XmlElement)doc.SelectSingleNode("//Warmup");
-                warmupUrls.Add(warmupElement.GetAttribute("Url"));
+                warmupUrls.Add(new WarmupUrl
+                {
+                    Name = warmupElement.GetAttribute("Name"),
+                    Url = warmupElement.GetAttribute("Url"),
+                });
             }
 
             return warmupUrls;
+        }
+
+        public class WarmupUrl
+        {
+            public string Name;
+            public string Url;
         }
     }
 }

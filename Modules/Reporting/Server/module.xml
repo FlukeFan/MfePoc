@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <xml>
-  <Warmup Url="/Reporting" />
+  <Warmup Name="Reporting" Url="/Reporting" />
   <Menu Position="3" Text="Reporting" Path="/Reporting/" />
 </xml>

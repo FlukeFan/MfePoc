@@ -22,17 +22,17 @@
     {
         _hub = await ClientHub.GetStartedHubAsync(NavManager);
         _stockLevels = await _hub.RequestStockLevelsAsync();
-        _hub.OnStockUpdate += OnStockUpdate;
+        _hub.OnStockUpdateAsync += OnStockUpdateAsync;
     }
 
-    private void OnStockUpdate(StockLevelResponse response)
+    private async Task OnStockUpdateAsync(StockLevelResponse response)
     {
         _stockLevels = response;
-        StateHasChanged();
+        await InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()
     {
-        _hub.OnStockUpdate -= OnStockUpdate;
+        _hub.OnStockUpdateAsync -= OnStockUpdateAsync;
     }
 }

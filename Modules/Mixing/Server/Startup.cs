@@ -40,6 +40,8 @@ namespace MfePoc.Mixing.Server
                     opt.FileProviders.Add(new PhysicalFileProvider(libFullPath));
                 });
             }
+
+            services.AddServerSideBlazor();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -53,6 +55,7 @@ namespace MfePoc.Mixing.Server
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapBlazorHub();
                 endpoints.MapHub<MixingHub>("/hub");
                 endpoints.MapFallbackToPage("/_Host");
             });

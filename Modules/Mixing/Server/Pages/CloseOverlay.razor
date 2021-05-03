@@ -1,0 +1,8 @@
+﻿@inject Microsoft.JSInterop.IJSRuntime Js
+@code {
+    override protected async Task OnInitializedAsync()
+    {
+        await Js.InvokeAsync<object>("closeOverlay", null);
+        await base.OnInitializedAsync();
+    }
+}

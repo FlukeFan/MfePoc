@@ -15,6 +15,11 @@
     });
 
     function internalNotify(message) {
+        if (!$.notify) {
+            console.log('notify: ' + message);
+            return;
+        }
+
         $.notify(message, {
             delay: 3500,
             timer: 100,

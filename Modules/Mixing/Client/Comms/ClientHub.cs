@@ -8,7 +8,7 @@ namespace MfePoc.Mixing.Client.Comms
 {
     public class ClientHub
     {
-        public event Action<StockLevelResponse> OnStockUpdate;
+        public event Func<StockLevelResponse, Task> OnStockUpdateAsync;
 
         private static SemaphoreSlim _lock = new SemaphoreSlim(1);
         private static ClientHub _instance;
@@ -59,9 +59,9 @@ namespace MfePoc.Mixing.Client.Comms
             return (string)response;
         }
 
-        public void OnStockUpdated(StockLevelResponse levels)
+        public async Task OnStockUpdated(StockLevelResponse levels)
         {
-            OnStockUpdate?.Invoke(levels);
+            await (OnStockUpdateAsync?.Invoke(levels) ?? Task.CompletedTask);
         }
 
         private class KeepRetrying : IRetryPolicy

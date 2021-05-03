@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorCS2.Client\MfePoc.BlazorCS2.Client.csproj" />
-    <ProjectReference Include="..\Shared\MfePoc.Shared.csproj" />
+    <ProjectReference Include="..\Client\MfePoc.Reporting.Client.csproj" />
+    <ProjectReference Include="..\..\..\Shared\MfePoc.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

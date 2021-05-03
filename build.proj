@@ -26,9 +26,6 @@
     <ZipDirectory DestinationFile="$(PackageFolder)/home.publish.zip" SourceDirectory="Home/bin/Release/netcoreapp3.1/win-x64/publish" />
 
     <CallTarget Targets="%(Modules.PackageTarget)" />
-
-    <Exec WorkingDirectory="BlazorCS2" Command="dotnet publish -c Release -r win-x64 --self-contained" />
-    <ZipDirectory DestinationFile="$(PackageFolder)/blazorcs2.publish.zip" SourceDirectory="BlazorCS2/bin/Release/net5.0/win-x64/publish" />
   </Target>
 
   <Target Name="Deploy" DependsOnTargets="Package">
@@ -36,13 +33,6 @@
     <Error Text="Need to set MfePocFtpUser variable" Condition="'$(MfePocFtpUser)'==''" />
     <Error Text="Need to set MfePocFtpPassword variable" Condition="'$(MfePocFtpPassword)'==''" />
     <Error Text="Need to set MfePocFtpRemoteDir variable" Condition="'$(MfePocFtpRemoteDir)'==''" />
-    <ItemGroup>
-      <FtpFileLines Include="mkdir blazorcs2" />
-      <FtpFileLines Include="rm blazorcs2/publish.tmp" />
-      <FtpFileLines Include="put $(PackageFolder)/blazorcs2.publish.zip blazorcs2/publish.tmp" />
-      <FtpFileLines Include="rm blazorcs2/publish.zip" />
-      <FtpFileLines Include="mv blazorcs2/publish.tmp blazorcs2/publish.zip" />
-    </ItemGroup>
     <WriteLinesToFile File="$(TEMP)/MfePocFtpBatch.txt" Lines="@(FtpFileLines)" Overwrite="true" />
     <Exec EchoOff="$(EchoOff)" Command="Tools\PuTTY\psftp.exe -pw $(MfePocFtpPassword) -b $(TEMP)/MfePocFtpBatch.txt $(MfePocFtpUser)@$(MfePocFtpHost) -be &lt;Tools\PuTTY\input.txt &gt; NUL 2&gt;&amp;1" />
     <Message Text="Completed SFTP of packages" Importance="high" />

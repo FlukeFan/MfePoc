@@ -1,0 +1,22 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup>
+    <Modules Include="Reporting">
+      <PackageTarget>Reporting_Package</PackageTarget>
+    </Modules>
+  </ItemGroup>
+
+  <Target Name="Reporting_Package">
+    <Exec WorkingDirectory="$(MSBuildThisFileDirectory)Server" Command="dotnet publish -c Release -r win-x64 --self-contained" />
+    <ZipDirectory DestinationFile="$(PackageFolder)/reporting.publish.zip" SourceDirectory="$(MSBuildThisFileDirectory)Server/bin/Release/net5.0/win-x64/publish" />
+  </Target>
+
+  <ItemGroup>
+    <FtpFileLines Include="mkdir reporting" />
+    <FtpFileLines Include="rm reporting/publish.tmp" />
+    <FtpFileLines Include="put $(PackageFolder)/reporting.publish.zip reporting/publish.tmp" />
+    <FtpFileLines Include="rm reporting/publish.zip" />
+    <FtpFileLines Include="mv reporting/publish.tmp reporting/publish.zip" />
+  </ItemGroup>
+
+</Project>

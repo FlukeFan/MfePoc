@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MfePoc.BlazorCS2.Client
+namespace MfePoc.Reporting.Client
 {
     public class Program
     {

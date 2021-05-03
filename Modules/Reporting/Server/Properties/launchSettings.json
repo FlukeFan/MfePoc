@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost:8123/BlazorCS2",
+      "applicationUrl": "http://localhost:8123/Reporting",
       "sslPort": 0
     }
   },

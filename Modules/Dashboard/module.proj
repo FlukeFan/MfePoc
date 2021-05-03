@@ -1,0 +1,14 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup>
+    <Modules Include="Dashboard">
+      <PackageTarget>Dashboard_Package</PackageTarget>
+    </Modules>
+  </ItemGroup>
+
+  <Target Name="Dashboard_Package">
+    <Exec WorkingDirectory="$(MSBuildThisFileDirectory)Module" Command="dotnet publish -c Release -r win-x64 --self-contained" />
+    <ZipDirectory DestinationFile="$(PackageFolder)/dashboard.publish.zip" SourceDirectory="$(MSBuildThisFileDirectory)Module/bin/Release/netcoreapp3.1/win-x64/publish" />
+  </Target>
+
+</Project>

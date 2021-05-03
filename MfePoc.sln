@@ -28,22 +28,31 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{36E3E573-C400-4298-AE4C-43C3CA64C4DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mixing", "Mixing", "{00F1EFCA-5372-46C5-AC50-774080423827}"
+	ProjectSection(SolutionItems) = preProject
+		Modules\Mixing\module.proj = Modules\Mixing\module.proj
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Mixing.Client", "Modules\Mixing\Client\MfePoc.Mixing.Client.csproj", "{410FFDAD-F678-4F9E-9654-7E01DD20F8C2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Mixing.Server", "Modules\Mixing\Server\MfePoc.Mixing.Server.csproj", "{6D06EE06-B440-4908-8021-9460AE7E2CFE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generation", "Generation", "{773109F1-0807-44E3-BB39-9E5D559A2715}"
+	ProjectSection(SolutionItems) = preProject
+		Modules\Generation\module.proj = Modules\Generation\module.proj
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Generation", "Modules\Generation\Module\MfePoc.Generation.csproj", "{4A65C018-39D6-40E9-9F3D-125A069DE0F5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dashboard", "Dashboard", "{15C2D9F9-C47B-42E1-ACAF-0ADA8FCC483C}"
+	ProjectSection(SolutionItems) = preProject
+		Modules\Dashboard\module.proj = Modules\Dashboard\module.proj
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Dashboard", "Modules\Dashboard\Module\MfePoc.Dashboard.csproj", "{633B8569-4F2E-421E-A34F-42B27CD6F337}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Generation.Contract", "Modules\Generation\Contract\MfePoc.Generation.Contract.csproj", "{CCF8C9E9-AC0B-44B3-8B95-807C77F47FDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MfePoc.Mixing.Contract", "Modules\Mixing\Contract\MfePoc.Mixing.Contract.csproj", "{57734ABF-56D4-41BC-91C2-763C65C6E3F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MfePoc.Mixing.Contract", "Modules\Mixing\Contract\MfePoc.Mixing.Contract.csproj", "{57734ABF-56D4-41BC-91C2-763C65C6E3F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

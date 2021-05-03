@@ -11,4 +11,12 @@
     <ZipDirectory DestinationFile="$(PackageFolder)/dashboard.publish.zip" SourceDirectory="$(MSBuildThisFileDirectory)Module/bin/Release/netcoreapp3.1/win-x64/publish" />
   </Target>
 
+  <ItemGroup>
+    <FtpFileLines Include="mkdir dashboard" />
+    <FtpFileLines Include="rm dashboard/publish.tmp" />
+    <FtpFileLines Include="put $(PackageFolder)/dashboard.publish.zip dashboard/publish.tmp" />
+    <FtpFileLines Include="rm dashboard/publish.zip" />
+    <FtpFileLines Include="mv dashboard/publish.tmp dashboard/publish.zip" />
+  </ItemGroup>
+
 </Project>

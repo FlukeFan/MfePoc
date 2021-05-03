@@ -11,4 +11,12 @@
     <ZipDirectory DestinationFile="$(PackageFolder)/mixing.publish.zip" SourceDirectory="$(MSBuildThisFileDirectory)Server/bin/Release/net5.0/win-x64/publish" />
   </Target>
 
+  <ItemGroup>
+    <FtpFileLines Include="mkdir mixing" />
+    <FtpFileLines Include="rm mixing/publish.tmp" />
+    <FtpFileLines Include="put $(PackageFolder)/mixing.publish.zip mixing/publish.tmp" />
+    <FtpFileLines Include="rm mixing/publish.zip" />
+    <FtpFileLines Include="mv mixing/publish.tmp mixing/publish.zip" />
+  </ItemGroup>
+
 </Project>

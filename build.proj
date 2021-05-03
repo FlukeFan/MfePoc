@@ -5,6 +5,18 @@
     <EchoOff Condition="'$(EchoOff)'==''">True</EchoOff>
   </PropertyGroup>
 
+    <ItemGroup>
+    <FtpFileLines Include="cd $(MfePocFtpRemoteDir)" />
+    <FtpFileLines Include="rm setup_iis.ps1" />
+    <FtpFileLines Include="put setup_iis.ps1 setup_iis.ps1" />
+
+    <FtpFileLines Include="mkdir home" />
+    <FtpFileLines Include="rm home/publish.tmp" />
+    <FtpFileLines Include="put $(PackageFolder)/home.publish.zip home/publish.tmp" />
+    <FtpFileLines Include="rm home/publish.zip" />
+    <FtpFileLines Include="mv home/publish.tmp home/publish.zip" />
+  </ItemGroup>
+
   <Import Project="**/module.proj" />
 
   <Target Name="Package">
@@ -27,34 +39,6 @@
     <Error Text="Need to set MfePocFtpPassword variable" Condition="'$(MfePocFtpPassword)'==''" />
     <Error Text="Need to set MfePocFtpRemoteDir variable" Condition="'$(MfePocFtpRemoteDir)'==''" />
     <ItemGroup>
-      <FtpFileLines Include="cd $(MfePocFtpRemoteDir)" />
-      <FtpFileLines Include="rm setup_iis.ps1" />
-      <FtpFileLines Include="put setup_iis.ps1 setup_iis.ps1" />
-
-      <FtpFileLines Include="mkdir home" />
-      <FtpFileLines Include="rm home/publish.tmp" />
-      <FtpFileLines Include="put $(PackageFolder)/home.publish.zip home/publish.tmp" />
-      <FtpFileLines Include="rm home/publish.zip" />
-      <FtpFileLines Include="mv home/publish.tmp home/publish.zip" />
-
-      <FtpFileLines Include="mkdir generation" />
-      <FtpFileLines Include="rm generation/publish.tmp" />
-      <FtpFileLines Include="put $(PackageFolder)/generation.publish.zip generation/publish.tmp" />
-      <FtpFileLines Include="rm generation/publish.zip" />
-      <FtpFileLines Include="mv generation/publish.tmp generation/publish.zip" />
-
-      <FtpFileLines Include="mkdir mixing" />
-      <FtpFileLines Include="rm mixing/publish.tmp" />
-      <FtpFileLines Include="put $(PackageFolder)/mixing.publish.zip mixing/publish.tmp" />
-      <FtpFileLines Include="rm mixing/publish.zip" />
-      <FtpFileLines Include="mv mixing/publish.tmp mixing/publish.zip" />
-
-      <FtpFileLines Include="mkdir dashboard" />
-      <FtpFileLines Include="rm dashboard/publish.tmp" />
-      <FtpFileLines Include="put $(PackageFolder)/dashboard.publish.zip dashboard/publish.tmp" />
-      <FtpFileLines Include="rm dashboard/publish.zip" />
-      <FtpFileLines Include="mv dashboard/publish.tmp dashboard/publish.zip" />
-
       <FtpFileLines Include="mkdir blazorss2" />
       <FtpFileLines Include="rm blazorss2/publish.tmp" />
       <FtpFileLines Include="put $(PackageFolder)/blazorss2.publish.zip blazorss2/publish.tmp" />

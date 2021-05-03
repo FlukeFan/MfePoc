@@ -11,4 +11,12 @@
     <ZipDirectory DestinationFile="$(PackageFolder)/generation.publish.zip" SourceDirectory="$(MSBuildThisFileDirectory)Module/bin/Release/netcoreapp3.1/win-x64/publish" />
   </Target>
 
+  <ItemGroup>
+    <FtpFileLines Include="mkdir generation" />
+    <FtpFileLines Include="rm generation/publish.tmp" />
+    <FtpFileLines Include="put $(PackageFolder)/generation.publish.zip generation/publish.tmp" />
+    <FtpFileLines Include="rm generation/publish.zip" />
+    <FtpFileLines Include="mv generation/publish.tmp generation/publish.zip" />
+  </ItemGroup>
+
 </Project>

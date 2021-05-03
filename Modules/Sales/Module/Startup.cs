@@ -1,4 +1,5 @@
 using System.IO;
+using MfePoc.Shared.Bus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
@@ -21,6 +22,7 @@ namespace MfePoc.Sales
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddZipDeploy();
+            services.AddDumbFileBus("Sales", GetType().Assembly);
 
             var mvcBuilder = services.AddRazorPages();
 

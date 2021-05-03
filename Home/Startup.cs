@@ -1,4 +1,5 @@
 using System.IO;
+using MfePoc.Shared.Bus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
@@ -25,6 +26,7 @@ namespace MfePoc.Home
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddZipDeploy();
+            services.AddDumbFileBus("Home", GetType().Assembly);
 
             var mvcBuilder = services.AddControllersWithViews();
 

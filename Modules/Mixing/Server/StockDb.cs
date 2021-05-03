@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MfePoc.Mixing.Client.Comms;
 using MfePoc.Shared.Bus;
+using Microsoft.AspNetCore.SignalR;
 
 namespace MfePoc.Mixing.Server
 {
@@ -74,6 +75,11 @@ namespace MfePoc.Mixing.Server
                 Blue = blue,
             });
 
+            await OnUpdatedAsync();
+        }
+
+        private async Task OnUpdatedAsync()
+        {
             await _bus.PublishAsync(new Mixing.Contract.OnStockUpdated
             {
                 Yellow = Yellow,
@@ -107,6 +113,24 @@ namespace MfePoc.Mixing.Server
                 _stockDb.Green = message.Green;
                 _stockDb.Blue = message.Blue;
                 return Task.CompletedTask;
+            }
+        }
+
+        private class ServiceStarted : IHandle<OnServiceStarted>
+        {
+            private readonly StockDb _stockDb;
+            private readonly IHubContext<MixingHub> _hub;
+
+            public ServiceStarted(StockDb stockDb, IHubContext<MixingHub> hub)
+            {
+                _stockDb = stockDb;
+                _hub = hub;
+            }
+
+            public async Task HandleAsync(OnServiceStarted message)
+            {
+                await _stockDb.OnUpdatedAsync();
+                await _hub.Clients.All.SendAsync(nameof(ClientHub.OnStockUpdated), _stockDb.Levels());
             }
         }
     }

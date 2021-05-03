@@ -23,6 +23,7 @@ namespace MfePoc.Sales
         {
             services.AddZipDeploy();
             services.AddDumbFileBus("Sales", GetType().Assembly);
+            services.AddSingleton<StockDb>();
 
             var mvcBuilder = services.AddRazorPages();
 

@@ -51,6 +51,7 @@ namespace MfePoc.Sales
 
         public CurrentWorth CalculateCurrentWorth()
         {
+            var exchangeRate = _exchangeRate;
             var yellow = Yellow;
             var cyan = Cyan;
             var magenta = Magenta;
@@ -60,20 +61,36 @@ namespace MfePoc.Sales
             cyan -= white;
             magenta -= white;
 
-            var worth = new CurrentWorth
+            var unitWhitePackageWorth = 16m * exchangeRate;
+            var unitColourPackageWorth = 4m * exchangeRate;
+
+            var whitePackageWorth = white * unitWhitePackageWorth;
+            var yellowPackageWorth = yellow * unitColourPackageWorth;
+            var cyanPackageWorth = cyan * unitColourPackageWorth;
+            var magentaPackageWorth = magenta * unitColourPackageWorth;
+            var totalWorth = whitePackageWorth + yellowPackageWorth + cyanPackageWorth + magentaPackageWorth;
+
+            return new CurrentWorth
             {
                 ExchangeRate = decimal.Round(_exchangeRate, 2),
 
+                UnitWhitePackageWorth = decimal.Round(unitWhitePackageWorth, 2),
+                UnitColourPackageWorth = decimal.Round(unitColourPackageWorth, 2),
+
                 WhitePackageCount = white,
+                WhitePackageWorth = decimal.Round(whitePackageWorth, 2),
 
                 YellowPackageCount = yellow,
+                YellowPackageWorth = decimal.Round(yellowPackageWorth, 2),
 
                 CyanPackageCount = cyan,
+                CyanPackageWorth = decimal.Round(cyanPackageWorth, 2),
 
                 MagentaPackageCount = magenta,
-            };
+                MagentaPackageWorth = decimal.Round(magentaPackageWorth, 2),
 
-            return worth;
+                TotalWorth = decimal.Round(totalWorth, 2),
+            };
         }
 
         private async Task UpdateExchangeRate()

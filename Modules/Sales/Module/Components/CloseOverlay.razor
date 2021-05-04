@@ -1,0 +1,8 @@
+﻿@inject IJSRuntime Js
+@code {
+    override protected async Task OnInitializedAsync()
+    {
+        await Js.InvokeVoidAsync("closeOverlay");
+        await base.OnInitializedAsync();
+    }
+}

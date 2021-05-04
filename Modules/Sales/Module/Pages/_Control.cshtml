@@ -1,0 +1,42 @@
+﻿@page "/Control"
+@namespace MfePoc.Sales.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/_content/MfePoc.Shared/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/_content/MfePoc.Shared/css/site.css" asp-append-version="true" />
+    <base href="/Sales/" />
+
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="initOverlay" style="position: absolute; height: 100%; width: 100%; background: grey; opacity: 0.2; display: flex; justify-content: center; align-items: center;">
+        <span class="spinner-border" style=""></span>
+    </div>
+    @{
+        var controlName = Request.Query["control"];
+        var controlType = typeof(App).Assembly.GetTypes().Single(t => t.Name == controlName);
+    }
+    <component type="controlType" render-mode="Server" />
+    <component type="typeof(Sales.Components.CloseOverlay)" render-mode="Server" />
+
+    <script src="~/_content/MfePoc.Shared/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/_content/MfePoc.Shared/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/_content/MfePoc.Shared/js/mfeNotify.js" asp-append-version="true"></script>
+
+    <script src="/Sales/_framework/blazor.server.js"></script>
+    <script>
+        window.closeOverlay = function () { $('#initOverlay').remove(); };
+    </script>
+    <script src="~/_content/MfePoc.Shared/js/blazorServerReload.js" asp-append-version="true"></script>
+
+</body>
+</html>

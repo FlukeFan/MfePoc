@@ -1,5 +1,6 @@
 ﻿@using MfePoc.Generation.Contract
 @using MfePoc.Mixing.Contract
+@using MfePoc.Sales.Contract
 @{
     this.SetAppLayout(
         title: "Dashboard",
@@ -39,6 +40,12 @@
             @MixingControls.StockLevels()
         </div>
 
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            @SalesControls.SellControls()
+        </div>
     </div>
 
 </div>

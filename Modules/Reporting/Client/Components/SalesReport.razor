@@ -1,4 +1,5 @@
-﻿@inject IJSRuntime Js
+﻿@implements IDisposable
+@inject IJSRuntime Js
 @inject NavigationManager NavManager
 
 @if (_sales != null)
@@ -37,10 +38,13 @@
 
 @code {
 
+    private ClientHub _hub;
     private ClientHub.Sales _sales;
 
     protected override async Task OnInitializedAsync()
     {
+        _hub = await ClientHub.GetStartedHubAsync(NavManager);
+        _hub.OnReportUpdateAsync += Refresh;
         await Refresh();
         await base.OnInitializedAsync();
     }
@@ -53,9 +57,12 @@
 
     private async Task Refresh()
     {
-        var hub = await ClientHub.GetStartedHubAsync(NavManager);
-        _sales = await hub.RequestSalesAsync();
+        _sales = await _hub.RequestSalesAsync();
         await InvokeAsync(StateHasChanged);
     }
 
+    public void Dispose()
+    {
+        _hub.OnReportUpdateAsync -= Refresh;
+    }
 }

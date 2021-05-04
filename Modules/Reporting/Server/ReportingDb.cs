@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MfePoc.Reporting.Client;
 using MfePoc.Sales.Contract;
 using MfePoc.Shared.Bus;
+using Microsoft.AspNetCore.SignalR;
 
 namespace MfePoc.Reporting.Server
 {
@@ -16,23 +17,25 @@ namespace MfePoc.Reporting.Server
             return new ClientHub.Sales
             {
                 Total = decimal.Round(_sales.Sum(s => s.Amount), 2),
-                Items = _sales.OrderBy(s => s.WhenUtc).ToList(),
+                Items = _sales.OrderByDescending(s => s.WhenUtc).ToList(),
             };
         }
 
         private class SellExecuted : IHandle<OnSellExecuted>
         {
             private readonly ReportingDb _reportingDb;
+            private readonly IHubContext<ReportingHub> _hub;
 
-            public SellExecuted(ReportingDb reportingDb)
+            public SellExecuted(ReportingDb reportingDb, IHubContext<ReportingHub> hub)
             {
                 _reportingDb = reportingDb;
+                _hub = hub;
             }
 
-            public Task HandleAsync(OnSellExecuted message)
+            public async Task HandleAsync(OnSellExecuted message)
             {
                 _reportingDb._sales.Add(message);
-                return Task.CompletedTask;
+                await _hub.Clients.All.SendAsync("OnReportUpdated");
             }
         }
     }

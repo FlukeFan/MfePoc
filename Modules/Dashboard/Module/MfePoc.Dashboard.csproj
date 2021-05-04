@@ -13,6 +13,7 @@
     <ProjectReference Include="..\..\..\Shared\MfePoc.Shared.csproj" />
     <ProjectReference Include="..\..\Generation\Contract\MfePoc.Generation.Contract.csproj" />
     <ProjectReference Include="..\..\Mixing\Contract\MfePoc.Mixing.Contract.csproj" />
+    <ProjectReference Include="..\..\Reporting\Contract\MfePoc.Reporting.Contract.csproj" />
     <ProjectReference Include="..\..\Sales\Contract\MfePoc.Sales.Contract.csproj" />
   </ItemGroup>
 

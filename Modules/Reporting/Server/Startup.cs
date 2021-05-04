@@ -23,6 +23,8 @@ namespace MfePoc.Reporting.Server
         {
             services.AddZipDeploy();
             services.AddDumbFileBus("Reporting", GetType().Assembly);
+            services.AddSingleton<ReportingDb>();
+            services.AddSignalR();
 
             var mvcBuilder = services.AddRazorPages();
 
@@ -50,6 +52,7 @@ namespace MfePoc.Reporting.Server
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ReportingHub>("/hub");
                 endpoints.MapFallbackToPage("/_Host");
             });
         }

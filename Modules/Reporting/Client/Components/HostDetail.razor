@@ -1,0 +1,16 @@
+﻿@inject NavigationManager NavManager
+
+<p>@_message</p>
+
+@code {
+
+    private string _message;
+
+    private ClientHub _hub;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _hub = await ClientHub.GetStartedHubAsync(NavManager);
+        _message = await _hub.RequestHostDetailAsync();
+    }
+}

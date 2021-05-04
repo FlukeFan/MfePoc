@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using MfePoc.Sales.Contract;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 
@@ -47,6 +49,12 @@ namespace MfePoc.Reporting.Client
             return (string)response;
         }
 
+        public async Task<Sales> RequestSalesAsync()
+        {
+            var response = await _hub.InvokeCoreAsync("RequestSales", typeof(Sales), new object[0]);
+            return (Sales)response;
+        }
+
         public async Task OnReportUpdated()
         {
             await (OnReportUpdateAsync?.Invoke() ?? Task.CompletedTask);
@@ -58,6 +66,12 @@ namespace MfePoc.Reporting.Client
             {
                 return TimeSpan.FromMilliseconds(500);
             }
+        }
+
+        public class Sales
+        {
+            public decimal Total { get; set; }
+            public IList<OnSellExecuted> Items {get;set;}
         }
     }
 }

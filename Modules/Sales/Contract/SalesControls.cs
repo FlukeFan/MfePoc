@@ -6,7 +6,7 @@ namespace MfePoc.Sales.Contract
     {
         public static HtmlString SellControls()
         {
-            return new HtmlString($"<iframe src=\"/Sales/Control?control=SellControls\" frameborder=\"0\" style=\"width:100%; height:340px\"></iframe>");
+            return new HtmlString($"<iframe src=\"/Sales/Control?control=SellControls\" frameborder=\"0\" style=\"width:100%;\"></iframe>");
         }
     }
 }

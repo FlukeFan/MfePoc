@@ -1,4 +1,5 @@
-﻿@inject StockDb StockDb
+﻿@implements IDisposable
+@inject StockDb StockDb
 <p>
     Current rate: colour worth @FormatMoney(_currentWorth.ExchangeRate)
     <ul>
@@ -20,9 +21,20 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _currentWorth = StockDb.CalculateCurrentWorth();
-        await Task.CompletedTask;
+        StockDb.OnStockUpdateAsync += Refresh;
+        await Refresh();
         base.OnInitialized();
+    }
+
+    void IDisposable.Dispose()
+    {
+        StockDb.OnStockUpdateAsync -= Refresh;
+    }
+
+    private async Task Refresh()
+    {
+        _currentWorth = StockDb.CalculateCurrentWorth();
+        await InvokeAsync(StateHasChanged);
     }
 
     private string FormatMoney(decimal value)

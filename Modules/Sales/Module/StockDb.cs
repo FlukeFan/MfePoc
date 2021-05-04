@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MfePoc.Mixing.Contract;
+using MfePoc.Sales.Contract;
 using MfePoc.Shared.Bus;
 
 namespace MfePoc.Sales
@@ -109,6 +110,11 @@ namespace MfePoc.Sales
                 Yellow = consumedYellow,
                 Cyan = consumedCyan,
                 Magenta = consumedMagenta,
+            });
+
+            await _bus.PublishAsync(new OnSellExecuted
+            {
+                Amount = worth.TotalWorth,
             });
         }
 

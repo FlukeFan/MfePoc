@@ -9,7 +9,8 @@ namespace MfePoc.Dashboard.Handlers
         IHandle<Generation.Contract.OnStockUpdated>,
         IHandle<Generation.Contract.OnStockConsumed>,
         IHandle<Mixing.Contract.OnStockUpdated>,
-        IHandle<Mixing.Contract.OnStockConsumed>
+        IHandle<Mixing.Contract.OnStockConsumed>,
+        IHandle<Sales.Contract.OnSellExecuted>
     {
         private readonly IHubContext<DashboardHub> _hub;
 
@@ -41,6 +42,11 @@ namespace MfePoc.Dashboard.Handlers
         public async Task HandleAsync(Mixing.Contract.OnStockConsumed message)
         {
             await _hub.Clients.All.SendAsync("notify", $"Consumed: Yellow={message.Yellow} Cyan={message.Cyan} Magenta={message.Magenta}");
+        }
+
+        public async Task HandleAsync(Sales.Contract.OnSellExecuted message)
+        {
+            await _hub.Clients.All.SendAsync("notify", $"Sold £{message.Amount:0.00}");
         }
     }
 }

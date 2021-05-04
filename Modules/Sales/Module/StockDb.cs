@@ -114,6 +114,8 @@ namespace MfePoc.Sales
 
             await _bus.PublishAsync(new OnSellExecuted
             {
+                WhenUtc = DateTime.UtcNow,
+                Description = $"{worth.WhitePackageCount} White, {worth.YellowPackageCount} Yellow, {worth.CyanPackageCount} Cyan, and {worth.MagentaPackageCount} Magenta",
                 Amount = worth.TotalWorth,
             });
         }

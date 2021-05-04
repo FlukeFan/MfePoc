@@ -116,6 +116,27 @@ namespace MfePoc.Mixing.Server
             }
         }
 
+        private class StockConsumed : IHandle<Mixing.Contract.OnStockConsumed>
+        {
+            private readonly StockDb _stockDb;
+            private readonly IHubContext<MixingHub> _hub;
+
+            public StockConsumed(StockDb stockDb, IHubContext<MixingHub> hub)
+            {
+                _stockDb = stockDb;
+                _hub = hub;
+            }
+
+            public async Task HandleAsync(Mixing.Contract.OnStockConsumed message)
+            {
+                _stockDb.Yellow -= message.Yellow;
+                _stockDb.Cyan -= message.Cyan;
+                _stockDb.Magenta -= message.Magenta;
+                await _stockDb.OnUpdatedAsync();
+                await _hub.Clients.All.SendAsync(nameof(ClientHub.OnStockUpdated), _stockDb.Levels());
+            }
+        }
+
         private class ServiceStarted : IHandle<OnServiceStarted>
         {
             private readonly StockDb _stockDb;

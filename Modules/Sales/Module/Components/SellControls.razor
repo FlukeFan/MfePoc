@@ -14,7 +14,7 @@
     Total: @FormatMoney(_currentWorth.TotalWorth)
 </p>
 
-<button class="btn btn-primary">Sell</button>
+<button class="btn btn-primary" @onclick=Sell>Sell</button>
 
 @code {
     private StockDb.CurrentWorth _currentWorth;
@@ -35,6 +35,11 @@
     {
         _currentWorth = StockDb.CalculateCurrentWorth();
         await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task Sell()
+    {
+        await StockDb.SellAsync(_currentWorth);
     }
 
     private string FormatMoney(decimal value)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using MfePoc.Mixing.Contract;
 using MfePoc.Shared.Bus;
 
 namespace MfePoc.Sales
@@ -91,6 +92,24 @@ namespace MfePoc.Sales
 
                 TotalWorth = decimal.Round(totalWorth, 2),
             };
+        }
+
+        public async Task SellAsync(CurrentWorth worth)
+        {
+            var consumedYellow = worth.WhitePackageCount + worth.YellowPackageCount;
+            var consumedCyan = worth.WhitePackageCount + worth.CyanPackageCount;
+            var consumedMagenta = worth.WhitePackageCount + worth.MagentaPackageCount;
+
+            Yellow -= consumedYellow;
+            Cyan -= consumedCyan;
+            Magenta -= consumedMagenta;
+
+            await _bus.PublishAsync(new OnStockConsumed
+            {
+                Yellow = consumedYellow,
+                Cyan = consumedCyan,
+                Magenta = consumedMagenta,
+            });
         }
 
         private async Task UpdateExchangeRate()

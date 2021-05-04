@@ -1,0 +1,32 @@
+﻿@inject StockDb StockDb
+<p>
+    Current rate: colour worth @FormatMoney(_currentWorth.ExchangeRate)
+    <ul>
+        <li>@_currentWorth.WhitePackageCount x White Package (@FormatMoney(_currentWorth.UnitWhitePackageWorth) per package) = @FormatMoney(_currentWorth.WhitePackageWorth)</li>
+        <li>@_currentWorth.YellowPackageCount x Yellow Package (@FormatMoney(_currentWorth.UnitColourPackageWorth) per package) = @FormatMoney(_currentWorth.YellowPackageWorth)</li>
+        <li>@_currentWorth.CyanPackageCount x Cyan Package (@FormatMoney(_currentWorth.UnitColourPackageWorth) per package) = @FormatMoney(_currentWorth.CyanPackageWorth)</li>
+        <li>@_currentWorth.MagentaPackageCount x Magenta Package (@FormatMoney(_currentWorth.UnitColourPackageWorth) per package) = @FormatMoney(_currentWorth.MagentaPackageWorth)</li>
+    </ul>
+</p>
+
+<p>
+    Total: @FormatMoney(_currentWorth.TotalWorth)
+</p>
+
+<button class="btn btn-primary">Sell</button>
+
+@code {
+    private StockDb.CurrentWorth _currentWorth;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _currentWorth = StockDb.CalculateCurrentWorth();
+        await Task.CompletedTask;
+        base.OnInitialized();
+    }
+
+    private string FormatMoney(decimal value)
+    {
+        return $"£{value:0.00}";
+    }
+}

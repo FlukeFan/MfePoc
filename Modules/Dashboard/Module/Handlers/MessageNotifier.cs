@@ -46,7 +46,7 @@ namespace MfePoc.Dashboard.Handlers
 
         public async Task HandleAsync(Sales.Contract.OnSellExecuted message)
         {
-            await _hub.Clients.All.SendAsync("notify", $"Sold '{message.Description}' for £{message.Amount:0.00} at {message.WhenUtc}");
+            await _hub.Clients.All.SendAsync("notify", $"Sold '{message.Description}' for £{message.Amount:0\\.00} at {message.WhenUtc}");
         }
     }
 }

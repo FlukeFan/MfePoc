@@ -26,7 +26,7 @@
                     <tr>
                         <td>@sale.WhenUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td>
                         <td>@sale.Description</td>
-                        <td style="text-align:right;">@($"£{sale.Amount:0\\.00}")</td>
+                        <td style="text-align:right;">@FormatGBP(sale.Amount)</td>
                     </tr>
                 }
             }
@@ -40,7 +40,7 @@
         <tbody>
             <tr>
                 <td colspan="2"></td>
-                <td style="text-align:right;">@($"£{_sales.Total:0\\.00}")</td>
+                <td style="text-align:right;">@FormatGBP(_sales.Total)</td>
             </tr>
         </tbody>
     </table>
@@ -74,5 +74,11 @@
     public void Dispose()
     {
         _hub.OnReportUpdateAsync -= Refresh;
+    }
+
+    public string FormatGBP(decimal value)
+    {
+        // duplicated from MfePoc.Shared.FormattingExtensions rather than create a new assembly
+        return $"£{value:0.00}".Replace(",", ".");
     }
 }

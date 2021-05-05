@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\MfePoc.Reporting.Client.csproj" />
     <ProjectReference Include="..\..\..\Shared\MfePoc.Shared.csproj" />
+    <ProjectReference Include="..\Client\MfePoc.Reporting.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>

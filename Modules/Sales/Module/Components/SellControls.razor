@@ -1,18 +1,19 @@
 ﻿@implements IDisposable
 @inject IJSRuntime Js
 @inject StockDb StockDb
+@using Shared
 <p>
-    Current colour exchange rate (between £0.50 and £1.50): @FormatMoney(_currentWorth.ExchangeRate)
+    Current colour exchange rate (between £0.50 and £1.50): @_currentWorth.ExchangeRate.FormatGBP()
     <ul>
-        <li>@_currentWorth.WhitePackageCount x White Package (@FormatMoney(_currentWorth.UnitWhitePackageWorth) per package) = @FormatMoney(_currentWorth.WhitePackageWorth)</li>
-        <li>@_currentWorth.YellowPackageCount x Yellow Package (@FormatMoney(_currentWorth.UnitColourPackageWorth) per package) = @FormatMoney(_currentWorth.YellowPackageWorth)</li>
-        <li>@_currentWorth.CyanPackageCount x Cyan Package (@FormatMoney(_currentWorth.UnitColourPackageWorth) per package) = @FormatMoney(_currentWorth.CyanPackageWorth)</li>
-        <li>@_currentWorth.MagentaPackageCount x Magenta Package (@FormatMoney(_currentWorth.UnitColourPackageWorth) per package) = @FormatMoney(_currentWorth.MagentaPackageWorth)</li>
+        <li>@_currentWorth.WhitePackageCount x White Package (@_currentWorth.UnitWhitePackageWorth.FormatGBP() per package) = @_currentWorth.WhitePackageWorth.FormatGBP()</li>
+        <li>@_currentWorth.YellowPackageCount x Yellow Package (@_currentWorth.UnitColourPackageWorth.FormatGBP() per package) = @_currentWorth.YellowPackageWorth.FormatGBP()</li>
+        <li>@_currentWorth.CyanPackageCount x Cyan Package (@_currentWorth.UnitColourPackageWorth.FormatGBP() per package) = @_currentWorth.CyanPackageWorth.FormatGBP()</li>
+        <li>@_currentWorth.MagentaPackageCount x Magenta Package (@_currentWorth.UnitColourPackageWorth.FormatGBP() per package) = @_currentWorth.MagentaPackageWorth.FormatGBP()</li>
     </ul>
 </p>
 
 <p>
-    Total: @FormatMoney(_currentWorth.TotalWorth)
+    Total: @_currentWorth.TotalWorth.FormatGBP()
 </p>
 
 <button class="btn btn-primary" @onclick=Sell disabled=@(_currentWorth.TotalWorth == 0m)>Sell</button>
@@ -47,10 +48,5 @@
     private async Task Sell()
     {
         await StockDb.SellAsync(_currentWorth);
-    }
-
-    private string FormatMoney(decimal value)
-    {
-        return $"£{value:0\\.00}";
     }
 }

@@ -2,7 +2,7 @@
 @inject IJSRuntime Js
 @inject StockDb StockDb
 <p>
-    Current colour exchange rate: @FormatMoney(_currentWorth.ExchangeRate)
+    Current colour exchange rate (between £0.50 and £1.50): @FormatMoney(_currentWorth.ExchangeRate)
     <ul>
         <li>@_currentWorth.WhitePackageCount x White Package (@FormatMoney(_currentWorth.UnitWhitePackageWorth) per package) = @FormatMoney(_currentWorth.WhitePackageWorth)</li>
         <li>@_currentWorth.YellowPackageCount x Yellow Package (@FormatMoney(_currentWorth.UnitColourPackageWorth) per package) = @FormatMoney(_currentWorth.YellowPackageWorth)</li>

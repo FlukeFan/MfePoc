@@ -50,8 +50,8 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-12">
-            @ReportingControls.Report()
+        <div id="lazyReport" class="col-sm-12">
+            <button class="btn btn-primary" onclick="loadReport();">Load Report</button>
         </div>
     </div>
 
@@ -70,6 +70,12 @@ Bus messages:
 
 @section Scripts {
     <script>
+
+        var reportHtml = '@ReportingControls.Report()';
+
+        function loadReport() {
+            $('#lazyReport').html(reportHtml);
+        }
 
         $(function () {
             var hub = new signalR.HubConnectionBuilder()

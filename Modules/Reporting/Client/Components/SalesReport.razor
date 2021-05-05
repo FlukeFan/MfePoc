@@ -9,7 +9,7 @@
             <tr>
                 <th>Date/Time</th>
                 <th>Description</th>
-                <th>Amount</th>
+                <th style="text-align:right;">Amount</th>
             </tr>
         </thead>
         <tbody>
@@ -26,14 +26,24 @@
                     <tr>
                         <td>@sale.WhenUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td>
                         <td>@sale.Description</td>
-                        <td>@($"£{sale.Amount:0.00}")</td>
+                        <td style="text-align:right;">@($"£{sale.Amount:0.00}")</td>
                     </tr>
                 }
             }
         </tbody>
+        <thead>
+            <tr>
+                <th colspan="2"></th>
+                <th style="text-align:right;">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2"></td>
+                <td style="text-align:right;">@($"£{_sales.Total:0.00}")</td>
+            </tr>
+        </tbody>
     </table>
-
-    <p style="margin-top: 20px;">Total: @($"£{_sales.Total:0.00}")</p>
 }
 
 @code {

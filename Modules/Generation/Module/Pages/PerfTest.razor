@@ -22,7 +22,7 @@ Message Quantity:
 
     private int _quantity = 500;
     private string _message;
-    private bool _running = false;
+    private static bool _running = false;
 
     private async Task Send()
     {
@@ -38,7 +38,7 @@ Message Quantity:
         timer.Stop();
         var duation = timer.Elapsed;
 
-        _message = $"done {_quantity} messages in {duation} = {_quantity * 1000 / timer.ElapsedMilliseconds} messages per second";
+        _message = $"Sent {_quantity} messages in {duation} = {_quantity * 1000 / timer.ElapsedMilliseconds} messages per second";
         StateHasChanged();
 
         await Task.Delay(3000);

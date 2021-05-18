@@ -6,6 +6,5 @@
     <MenuItem Text="Red" Path="/Generation/GenerateRed" />
     <MenuItem Text="Green" Path="/Generation/GenerateGreen" />
     <MenuItem Text="Blue" Path="/Generation/GenerateBlue" />
-    <MenuItem Text="Bus Perf Test" Path="/Generation/PerfTest" />
   </Menu>
 </xml>

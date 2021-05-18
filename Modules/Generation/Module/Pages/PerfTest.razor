@@ -1,0 +1,48 @@
+﻿@page "/PerfTest"
+@using System.Diagnostics
+@inject MfePoc.Shared.Bus.IBus Bus
+
+Message Quantity:
+<input @bind-value=_quantity />
+<br />
+
+<button @onclick=@Send disabled=@(_running)>Send</button>
+<br />
+
+<div>
+    @_message
+</div>
+
+<a href="">Back</a>
+
+<br />
+<br />
+
+@code {
+
+    private int _quantity = 500;
+    private string _message;
+    private bool _running = false;
+
+    private async Task Send()
+    {
+        _running = true;
+        _message = "running";
+        await Task.Yield();
+
+        var timer = Stopwatch.StartNew();
+
+        for (var i = 0; i < _quantity; i++)
+            await Bus.PublishAsync(new MfePoc.Generation.Contract.OnPerfSent());
+
+        timer.Stop();
+        var duation = timer.Elapsed;
+
+        _message = $"done {_quantity} messages in {duation} = {_quantity * 1000 / timer.ElapsedMilliseconds} messages per second";
+        StateHasChanged();
+
+        await Task.Delay(3000);
+        _message = "";
+        _running = false;
+    }
+} 
